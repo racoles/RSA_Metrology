@@ -22,17 +22,6 @@ class RSAMetGUI(object):
         self.master = master
         master.title("RSA Meterology")
         
-        #Sensor data files
-        self.S00DataFile = None
-        self.S01DataFile = None
-        self.S02DataFile = None
-        self.S10DataFile = None
-        self.S11DataFile = None
-        self.S12DataFile = None
-        self.S20DataFile = None
-        self.S21DataFile = None
-        self.S22DataFile = None
-        
         #Construct GUI
         #Sensor location buttons to open data files for each sensor
         #    S22    S12    S02
@@ -42,7 +31,7 @@ class RSAMetGUI(object):
         #                <--+X    Ø +Z
         
         #REB0
-        S00 = Button(master, text="S00", width=10, command=self.openFile)
+        S00 = Button(master, text="S00", width=10, command=self.loadInputDataFile)
         S00.grid(row=2, column=2)
 
         S01 = Button(master, text="S01", width=10, command=self.openFile)
@@ -75,8 +64,8 @@ class RSAMetGUI(object):
         '''
         Load metrology data from input file using openpyxl library
         '''
-        self.wb = load_workbook(self.inputDataFile, read_only=True)
-        #print(self.wb)
+        filesName = self.openFile()
+        self.wb = load_workbook(filesName, read_only=True)
         
     def openFile(self):
         '''
