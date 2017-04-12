@@ -6,7 +6,7 @@ Created on Apr 4, 2017
 '''
 
 # Import #######################################################################################
-from tkinter import Button, filedialog
+from tkinter import Button, filedialog, PhotoImage, Label
 from openpyxl import load_workbook
 ################################################################################################
 
@@ -31,7 +31,7 @@ class RSAMetGUI(object):
         #                <--+X    Ø +Z
         
         #REB0
-        S00 = Button(master, text="S00", width=10, command=self.loadInputDataFile)
+        S00 = Button(master, text="S00", width=10, command=lambda:self.loadInputDataFile(S00))
         S00.grid(row=2, column=2)
 
         S01 = Button(master, text="S01", width=10, command=self.loadInputDataFile)
@@ -60,15 +60,33 @@ class RSAMetGUI(object):
         S22 = Button(master, text="S22", width=10, command=self.loadInputDataFile)
         S22.grid(row=0, column=0)
         
-    def loadInputDataFile(self):
+        #Add coordinate compass
+        self.cordImage = PhotoImage(file="cord.pgm", width=100, height=79)
+        cordLable = Label(image=self.cordImage)
+        cordLable.grid(row=3, column=3)
+        
+        
+    def loadInputDataFile(self, sensorButton):
         '''
         Load metrology data from input file using openpyxl library
         '''
-        filesName = self.openFile()
-        self.wb = load_workbook(filesName, read_only=True)
+        fileName = self.openFile()
+        self.wb = load_workbook(fileName, read_only=True)
+        self.ws = self.wb.get_sheet_by_name('Sheet1')
+        pythonList = list(self.iter_rows(self.ws))
+        print(pythonList)
+        sensorButton.config(text = fileName)
+
         
     def openFile(self):
         '''
         Create open file dialogue box
         '''
         return filedialog.askopenfilename()
+    
+    def iter_rows(self, ws):
+        '''
+        itterate through xlsx list
+        '''
+        for row in self.ws.iter_rows(row_offset=1):
+            yield [cell.value for cell in row]
