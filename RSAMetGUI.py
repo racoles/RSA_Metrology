@@ -8,6 +8,7 @@ Created on Apr 4, 2017
 # Import #######################################################################################
 from tkinter import Button, filedialog, PhotoImage, Label
 from openpyxl import load_workbook
+import ntpath
 ################################################################################################
 
 class RSAMetGUI(object):
@@ -80,7 +81,7 @@ class RSAMetGUI(object):
         pythonList = list(self.iter_rows(self.ws))
         print(pythonList)
         #update the button text to show the filename
-        sensorButton.config(text = fileName)
+        sensorButton.config(text = self.path_leaf(fileName))
 
         
     def openFile(self):
@@ -91,7 +92,14 @@ class RSAMetGUI(object):
     
     def iter_rows(self, ws):
         '''
-        itterate through xlsx list
+        iterate through xlsx list
         '''
         for row in self.ws.iter_rows(row_offset=1):
             yield [cell.value for cell in row]
+            
+    def path_leaf(self, path):
+        '''
+        get filename from full path
+        '''
+        head, tail = ntpath.split(path)
+        return tail or ntpath.basename(head)
