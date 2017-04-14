@@ -22,5 +22,5 @@ class RSA3DPlot(object):
     
     def createVirtualRSA(self):
         '''
-        perform coordinate transform and align data based on the sensor positions on the RSA
+        Perform coordinate transform and align data based on the sensor positions on the RSA.
         '''
