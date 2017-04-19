@@ -6,7 +6,7 @@ Created on Apr 14, 2017
 '''
 
 # Import #######################################################################################
-from numpy import array
+from numpy import array, rot90
 ################################################################################################
 
 class RSA3DPlot(object):
@@ -26,10 +26,11 @@ class RSA3DPlot(object):
         '''
         return array(RSAList)
         
-    def coordTransform(self):
+    def coordTransform(self, RSAarray):
         '''
         Perform coordinate transform from PCS coordinate system to CCS coordinate system (180 degree rotation).
         '''
+        return rot90(RSAarray,2)
     
     def createVirtualRSA(self):
         '''
