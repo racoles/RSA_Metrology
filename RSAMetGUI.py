@@ -24,7 +24,7 @@ class RSAMetGUI(object):
         master.title("RSA Meterology")
         
         #Construct GUI
-        #Sensor location buttons to open data files for each sensor
+        #Sensor location buttons to open data files for each sensor (CCS Coordinate system)
         #    S22    S12    S02
         #    S21    S11    S01    ^
         #    S20    S10    S00    |+Y
@@ -32,33 +32,33 @@ class RSAMetGUI(object):
         #                <--+X    Ø +Z
         
         #REB0
-        S00 = Button(master, text="S00", command=lambda:self.loadInputDataFile(S00))
+        S00 = Button(master, text="S00",bg = "white", command=lambda:self.loadInputDataFile(S00)) #white
         S00.grid(row=2, column=2)
         
-        S01 = Button(master, text="S01", command=lambda:self.loadInputDataFile(S01))
+        S01 = Button(master, text="S01",bg = "purple", command=lambda:self.loadInputDataFile(S01)) #purple
         S01.grid(row=1, column=2)
 
-        S02 = Button(master, text="S02", command=lambda:self.loadInputDataFile(S02))
+        S02 = Button(master, text="S02",bg = "yellow", command=lambda:self.loadInputDataFile(S02)) #yellow
         S02.grid(row=0, column=2)
         
         #REB1
-        S10 = Button(master, text="S10", command=lambda:self.loadInputDataFile(S10))
+        S10 = Button(master, text="S10",bg = "cyan", command=lambda:self.loadInputDataFile(S10)) #cyan
         S10.grid(row=2, column=1)
 
-        S11 = Button(master, text="S11", command=lambda:self.loadInputDataFile(S11))
+        S11 = Button(master, text="S11",bg = "blue", command=lambda:self.loadInputDataFile(S11)) #blue
         S11.grid(row=1, column=1)
 
-        S12 = Button(master, text="S12", command=lambda:self.loadInputDataFile(S12))
+        S12 = Button(master, text="S12",bg = "orange", command=lambda:self.loadInputDataFile(S12)) #orange
         S12.grid(row=0, column=1)
         
         #REB2
-        S20 = Button(master, text="S20", command=lambda:self.loadInputDataFile(S20))
+        S20 = Button(master, text="S20",bg = "magenta", command=lambda:self.loadInputDataFile(S20)) #magenta
         S20.grid(row=2, column=0)
 
-        S21 = Button(master, text="S21", command=lambda:self.loadInputDataFile(S21))
+        S21 = Button(master, text="S21",bg = "green", command=lambda:self.loadInputDataFile(S21)) #green
         S21.grid(row=1, column=0)
 
-        S22 = Button(master, text="S22", command=lambda:self.loadInputDataFile(S22))
+        S22 = Button(master, text="S22",bg = "red", command=lambda:self.loadInputDataFile(S22)) #red
         S22.grid(row=0, column=0)
         
         #Add coordinate compass
