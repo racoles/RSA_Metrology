@@ -1,12 +1,12 @@
 '''
 @title RSA3DPlot
 @author: Rebecca Coles
-Updated on Apr 14, 2017
+Updated on Apr 19, 2017
 Created on Apr 14, 2017
 '''
 
 # Import #######################################################################################
-
+from numpy import array
 ################################################################################################
 
 class RSA3DPlot(object):
@@ -20,7 +20,18 @@ class RSA3DPlot(object):
         Constructor
         '''
     
+    def convertToNumpy(self, RSAList):
+        '''
+        Convert python list to numpy array
+        '''
+        return array(RSAList)
+        
+    def coordTransform(self):
+        '''
+        Perform coordinate transform from PCS coordinate system to CCS coordinate system (180 degree rotation).
+        '''
+    
     def createVirtualRSA(self):
         '''
-        Perform coordinate transform and align data based on the sensor positions on the RSA.
+        Align data based on the sensor positions on the RSA.
         '''
