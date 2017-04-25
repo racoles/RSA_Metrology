@@ -77,6 +77,7 @@ class RSA3DPlot(object):
         S20 = array(S20List)
         S21 = array(S21List)
         S22 = array(S22List)
+        
         ###########################################################################
         ###Add Color column for later plotting
         ###########################################################################
@@ -233,16 +234,13 @@ class RSA3DPlot(object):
         #Set up figure
         fig = figure()
         ax = fig.add_subplot(111, projection='3d')
-        
         #Plot points (loop is used to make sure that sensor points are the proper colors)
         for ii in range(0,RSAArray.shape[0]-1):
             ax.scatter(RSAArray[ii,0], RSAArray[ii,1], RSAArray[ii,2], c=RSAArray[ii,3], marker='o')
-
         #Label axis
-        ax.set_xlabel('X Label')
-        ax.set_ylabel('Y Label')
-        ax.set_zlabel('Z Label')
-
+        ax.set_xlabel('X')
+        ax.set_ylabel('Y')
+        ax.set_zlabel('Z')
         #Show plot
         show()
         
