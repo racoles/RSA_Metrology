@@ -9,6 +9,7 @@ Created on Apr 4, 2017
 from tkinter import Button, filedialog, PhotoImage, Label
 from openpyxl import load_workbook
 import ntpath
+import RSA3DPlot
 ################################################################################################
 
 class RSAMetGUI(object):
@@ -65,6 +66,13 @@ class RSAMetGUI(object):
         self.cordImage = PhotoImage(file="cord.pgm", width=100, height=79)
         cordLable = Label(image=self.cordImage)
         cordLable.grid(row=3, column=3)
+        
+        #Plot RSA for manually selected sensor positions
+        manualPosition = Button(master, text = "Plot virtual RSA for manually selected sensor positions", 
+                                command=lambda:RSA3DPlot(S00, S01, S02, S10, S11, S12, S20, S21, S22))
+        manualPosition.grid(row=1, column=4)
+        
+        #Plot RSA for optimal sensor positions
         
         
     def loadInputDataFile(self, sensorButton):

@@ -15,10 +15,11 @@ class RSA3DPlot(object):
     '''
 
 
-    def __init__(self, params):
+    def __init__(self, S00List, S01List, S02List, S10List, S11List, S12List, S20List, S21List, S22List):
         '''
         Constructor
         '''
+        self.createVirtualRSA(S00List, S01List, S02List, S10List, S11List, S12List, S20List, S21List, S22List)
         
     def coordTransform(self, sensorPCS, Ymax):
         '''
@@ -216,6 +217,14 @@ class RSA3DPlot(object):
         S21CCSXMax, S21CCSYMax = S21CCS.nanmax(axis=0)
         S22CCS[:,0] + S12CCSXMax #X (S12X already has S02X added to it)
         S22CCS[:,1] + S21CCSYMax #Y (S21Y already has S20Y added to it)
+        
+        ###########################################################################
+        ###Save virtual RSA to text file
+        ###########################################################################
+        
+        ###########################################################################
+        ###Plot RSA based on user selected positions
+        ###########################################################################
         
     def plotSensors3D(self):
         '''
