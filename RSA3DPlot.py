@@ -165,8 +165,8 @@ class RSA3DPlot(object):
         ###########################################################################
         ###Place sensors in RSA positions
         ###########################################################################
-        #Place sensors: from left to right and top to bottom
-        #Sensor location buttons to open data files for each sensor (CCS Coordinate system)
+        #Place sensors: from right to left and bottom to top (to follow the CCS Coordinate system).
+        #Sensor location buttons to open data files for each sensor (CCS Coordinate system).
         #    S22    S12    S02
         #    S21    S11    S01    ^
         #    S20    S10    S00    |+Y
@@ -179,7 +179,18 @@ class RSA3DPlot(object):
         RSAArray = empty(0,4)
         #S00
         concatenate((RSAArray, S00CCS))
-        #S10 (next to S00)
+        #S10 (next to S00): S10X + S00Xmax
+        S10CCS[:,0] + S00XMax
+        concatenate((RSAArray, S10CCS))
+        #S20 (next to S10): S20X + S10Xmax + S00XMax
+        S20CCS[:,0] + S10XMax + S00XMax
+        concatenate((RSAArray, S20CCS))
+        #S01 (on top of S00): S01Y + S00CCSYmax)
+        S00CCSXMax, S00CCSYMax = S00CCS.nanmax(axis=0)
+        S01CCS[:,1] + S00CCSYMax
+        concatenate((RSAArray, S01CCS))
+        #S11 (on top of S10 AND next to S01)
+        
         
     def plotSensors3D(self):
         '''
