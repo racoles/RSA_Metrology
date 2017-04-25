@@ -230,14 +230,19 @@ class RSA3DPlot(object):
         '''
         Plot RSA sensor array in 3D
         '''
+        #Set up figure
         fig = figure()
         ax = fig.add_subplot(111, projection='3d')
         
-        ax.scatter(RSAArray[:,0], RSAArray[:,1], RSAArray[:,2], c='r', marker='o')
+        #Plot points (loop is used to make sure that sensor points are the proper colors)
+        for ii in range(0,RSAArray.shape[0]-1):
+            ax.scatter(RSAArray[ii,0], RSAArray[ii,1], RSAArray[ii,2], c=RSAArray[ii,3], marker='o')
 
+        #Label axis
         ax.set_xlabel('X Label')
         ax.set_ylabel('Y Label')
         ax.set_zlabel('Z Label')
 
+        #Show plot
         show()
         
