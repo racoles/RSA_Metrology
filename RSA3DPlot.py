@@ -6,14 +6,16 @@ Created on Apr 14, 2017
 '''
 
 # Import #######################################################################################
-from numpy import array, full, concatenate, copy, empty
+from numpy import array, full, concatenate, copy, empty, savetxt
+import time
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.pyplot import figure, show
 ################################################################################################
 
 class RSA3DPlot(object):
     '''
     3D plot RSA data
     '''
-
 
     def __init__(self, S00List, S01List, S02List, S10List, S11List, S12List, S20List, S21List, S22List, ManualOrAutoBOOL):
         '''
@@ -39,7 +41,6 @@ class RSA3DPlot(object):
         #Coordinate transform Y values
         yValues = copy(sensorPCS[:,1])
         yValues = [Ymax-yy for yy in yValues]
-        print(yValues)
         #Insert CCS Y coordinates into array
         sensorCCS = copy(sensorPCS)
         sensorCCS[:,1] = yValues
@@ -122,33 +123,20 @@ class RSA3DPlot(object):
         concatenate((S22, red), axis=1)    
         
         ###########################################################################
-        ###Find max/min (this will be used to place the sensor in the virtual RSA)
+        ###Find max/min (this will be used to coordinate transform the sensor from PCS to CCS)
         ###########################################################################
         #REB0 Sensors
-        #S00
         S00XMax, S00YMax = S00.nanmax(axis=0)
-        print(S00XMax, S00YMax)
         S01XMax, S01YMax = S01.nanmax(axis=0)
-        print(S01XMax, S01YMax)
         S02XMax, S02YMax = S02.nanmax(axis=0)
-        print(S02XMax, S02YMax)
-        
         #REB1 Sensors
         S10XMax, S10YMax = S10.nanmax(axis=0)
-        print(S10XMax, S10YMax)
         S11XMax, S11YMax = S11.nanmax(axis=0)
-        print(S11XMax, S11YMax)
         S12XMax, S12YMax = S12.nanmax(axis=0)
-        print(S12XMax, S12YMax)
-        
         #REB2 Sensors
-        #S20
         S20XMax, S20YMax = S20.nanmax(axis=0)
-        print(S20XMax, S20YMax)
         S21XMax, S21YMax = S21.nanmax(axis=0)
-        print(S21XMax, S21YMax)
         S22XMax, S22YMax = S22.nanmax(axis=0)
-        print(S22XMax, S22YMax)
         
         ###########################################################################
         ###Rotate sensors (coordinate transform from PCS to CCS coordinate systems)
@@ -169,16 +157,31 @@ class RSA3DPlot(object):
         ###########################################################################
         ###Place sensors in RSA positions
         ###########################################################################
-        #Place sensors: from right to left and bottom to top (to follow the CCS Coordinate system).
-        #Sensor location buttons to open data files for each sensor (CCS Coordinate system).
-        #    S22    S12    S02
-        #    S21    S11    S01    ^
-        #    S20    S10    S00    |+Y
-        #                         
-        #                <--+X    Ø +Z
-        #This will be done by adding the appropriate value to each X and Y values 
-        #    so that the data will show the proper position in a plot
+        timestr = 'none.csv'
+        if ManualOrAutoBOOL == 0:
+            RSAArray = self.manualPlacement(S00CCS, S01CCS, S02CCS, S10CCS, S11CCS, S12CCS, S20CCS, S21CCS, S22CCS)
+            timestr = time.strftime("%Y%m%d-%H%M%S") + '_manually_placed_virtualRSA.csv'
+        #elif ManualOrAutoBOOL == 1:
         
+        ###########################################################################
+        ###Save virtual RSA to text file
+        ###########################################################################
+        savetxt(timestr, RSAArray, delimiter=',')
+
+    def manualPlacement(self, S00CCS, S01CCS, S02CCS, S10CCS, S11CCS, S12CCS, S20CCS, S21CCS, S22CCS):
+        '''
+        Manually Place sensors in RSA positions
+
+        Place sensors: from right to left and bottom to top (to follow the CCS Coordinate system).
+        Sensor location buttons to open data files for each sensor (CCS Coordinate system).
+            S22    S12    S02
+            S21    S11    S01    ^
+            S20    S10    S00    |+Y
+                                 
+                        <--+X    Ø +Z
+        This will be done by adding the appropriate value to each X and Y values 
+            so that the data will show the proper position in a plot
+        '''
         #Create numpy RSA array
         RSAArray = empty(0,4)
         
@@ -221,11 +224,20 @@ class RSA3DPlot(object):
         S22CCS[:,0] + S12CCSXMax #X (S12X already has S02X added to it)
         S22CCS[:,1] + S21CCSYMax #Y (S21Y already has S20Y added to it)
         
-        ###########################################################################
-        ###Save virtual RSA to text file
-        ###########################################################################
+        return RSAArray
         
-    def plotSensors3D(self):
+    def plotSensors3D(self, RSAArray):
         '''
         Plot RSA sensor array in 3D
         '''
+        fig = figure()
+        ax = fig.add_subplot(111, projection='3d')
+        
+        ax.scatter(RSAArray[:,0], RSAArray[:,1], RSAArray[:,2], c='r', marker='o')
+
+        ax.set_xlabel('X Label')
+        ax.set_ylabel('Y Label')
+        ax.set_zlabel('Z Label')
+
+        show()
+        
