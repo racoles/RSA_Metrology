@@ -15,11 +15,11 @@ class RSA3DPlot(object):
     '''
 
 
-    def __init__(self, S00List, S01List, S02List, S10List, S11List, S12List, S20List, S21List, S22List):
+    def __init__(self, S00List, S01List, S02List, S10List, S11List, S12List, S20List, S21List, S22List, ManualOrAutoBOOL):
         '''
         Constructor
         '''
-        self.createVirtualRSA(S00List, S01List, S02List, S10List, S11List, S12List, S20List, S21List, S22List)
+        self.createVirtualRSA(S00List, S01List, S02List, S10List, S11List, S12List, S20List, S21List, S22List, ManualOrAutoBOOL)
         
     def coordTransform(self, sensorPCS, Ymax):
         '''
@@ -47,7 +47,7 @@ class RSA3DPlot(object):
         
         
     
-    def createVirtualRSA(self, S00List, S01List, S02List, S10List, S11List, S12List, S20List, S21List, S22List):
+    def createVirtualRSA(self, S00List, S01List, S02List, S10List, S11List, S12List, S20List, S21List, S22List, ManualOrAutoBOOL):
         '''
         Align data based on the sensor positions on the RSA.
         
@@ -57,6 +57,9 @@ class RSA3DPlot(object):
             S20    S10    S00    |+Y
                                  
                         <--+X    Ø +Z
+                        
+        ManualOrAutoBOOL = 0: Manual sensor position.
+        ManualOrAutoBOOL = 1: Auto calculate sensor position for optimal flatness.
         '''
         ###########################################################################
         ###Convert from Python list to Numpy array
@@ -220,10 +223,6 @@ class RSA3DPlot(object):
         
         ###########################################################################
         ###Save virtual RSA to text file
-        ###########################################################################
-        
-        ###########################################################################
-        ###Plot RSA based on user selected positions
         ###########################################################################
         
     def plotSensors3D(self):
