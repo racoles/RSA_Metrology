@@ -174,23 +174,48 @@ class RSA3DPlot(object):
         #                <--+X    Ø +Z
         #This will be done by adding the appropriate value to each X and Y values 
         #    so that the data will show the proper position in a plot
-        #
+        
         #Create numpy RSA array
         RSAArray = empty(0,4)
+        
+        #Place sensors
         #S00
         concatenate((RSAArray, S00CCS))
         #S10 (next to S00): S10X + S00Xmax
-        S10CCS[:,0] + S00XMax
+        S00CCSXMax, S00CCSYMax = S00CCS.nanmax(axis=0)
+        S10CCS[:,0] + S00CCSXMax #X
         concatenate((RSAArray, S10CCS))
         #S20 (next to S10): S20X + S10Xmax + S00XMax
-        S20CCS[:,0] + S10XMax + S00XMax
+        S10CCSXMax, S10CCSYMax = S10CCS.nanmax(axis=0)
+        S20CCS[:,0] + S10CCSXMax #X (S10X already has S00X added to it)
         concatenate((RSAArray, S20CCS))
         #S01 (on top of S00): S01Y + S00CCSYmax)
-        S00CCSXMax, S00CCSYMax = S00CCS.nanmax(axis=0)
-        S01CCS[:,1] + S00CCSYMax
+        S01CCS[:,1] + S00CCSYMax #Y
         concatenate((RSAArray, S01CCS))
         #S11 (on top of S10 AND next to S01)
-        
+        S01CCSXMax, S01CCSYMax = S01CCS.nanmax(axis=0)
+        S11CCS[:,0] + S01CCSXMax #X
+        S11CCS[:,1] + S10CCSYMax #Y
+        concatenate((RSAArray, S11CCS))
+        #S21 (on top of S20 AND next to S11)
+        S20CCSXMax, S20CCSYMax = S20CCS.nanmax(axis=0)
+        S11CCSXMax, S11CCSYMax = S11CCS.nanmax(axis=0)
+        S21CCS[:,0] + S11CCSXMax #X (S11X already has S01X added to it)
+        S21CCS[:,1] + S20CCSYMax
+        concatenate((RSAArray, S21CCS))
+        #S02 (on top of S00 and S01)
+        S02CCS[:,1] + S01CCSYMax #Y (S01Y already has S00Y added to it)
+        concatenate((RSAArray, S02CCS))
+        #S12 (on top of S10 and S11 AND next to S02)
+        S02CCSXMax, S02CCSYMax = S02CCS.nanmax(axis=0)
+        S12CCS[:,0] + S02CCSXMax #X
+        S12CCS[:,1] + S11CCSYMax #Y (S11Y already has S10Y added to it)
+        concatenate((RSAArray, S12CCS))
+        #S22 (on top of S21 and S20 AND next to S12 and S02)
+        S12CCSXMax, S12CCSYMax = S02CCS.nanmax(axis=0)
+        S21CCSXMax, S21CCSYMax = S21CCS.nanmax(axis=0)
+        S22CCS[:,0] + S12CCSXMax #X (S12X already has S02X added to it)
+        S22CCS[:,1] + S21CCSYMax #Y (S21Y already has S20Y added to it)
         
     def plotSensors3D(self):
         '''
