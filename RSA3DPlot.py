@@ -82,9 +82,6 @@ class RSA3DPlot(object):
         ###########################################################################
         #REB0 Sensors
         #S00
-        #print(S00)
-        #print(S01)
-        #print(S02)
         white = full((S00.shape[0],1), 'w')
         concatenate((S00, full((S00.shape[0],1), 'S00')), axis=1)
         concatenate((S00, white), axis=1)        
