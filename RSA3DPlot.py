@@ -1,14 +1,14 @@
 '''
 @title RSA3DPlot
 @author: Rebecca Coles
-Updated on Apr 19, 2017
+Updated on Apr 26, 2017
 Created on Apr 14, 2017
 '''
 
 # Import #######################################################################################
 from numpy import array, full, concatenate, copy, empty, savetxt
 import time
-from mpl_toolkits.mplot3d import Axes3D
+#from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.pyplot import figure, show
 ################################################################################################
 
@@ -17,13 +17,12 @@ class RSA3DPlot(object):
     3D plot RSA data
     '''
 
-    def __init__(self, S00List, S01List, S02List, S10List, S11List, S12List, S20List, S21List, S22List, ManualOrAutoBOOL):
+    def __init__(self):
         '''
         Constructor
         '''
-        self.createVirtualRSA(S00List, S01List, S02List, S10List, S11List, S12List, S20List, S21List, S22List, ManualOrAutoBOOL)
         
-    def coordTransform(self, sensorPCS, Ymax):
+    def _coordTransform(self, sensorPCS, Ymax):
         '''
         Perform coordinate transform from PCS coordinate system to CCS coordinate system (180 degree rotation).
         CCS --->+X
@@ -83,6 +82,9 @@ class RSA3DPlot(object):
         ###########################################################################
         #REB0 Sensors
         #S00
+        #print(S00)
+        #print(S01)
+        #print(S02)
         white = full((S00.shape[0],1), 'w')
         concatenate((S00, full((S00.shape[0],1), 'S00')), axis=1)
         concatenate((S00, white), axis=1)        
@@ -127,33 +129,33 @@ class RSA3DPlot(object):
         ###Find max/min (this will be used to coordinate transform the sensor from PCS to CCS)
         ###########################################################################
         #REB0 Sensors
-        S00XMax, S00YMax = S00.nanmax(axis=0)
-        S01XMax, S01YMax = S01.nanmax(axis=0)
-        S02XMax, S02YMax = S02.nanmax(axis=0)
+        _, S00YMax = S00.nanmax(axis=0)
+        _, S01YMax = S01.nanmax(axis=0)
+        _, S02YMax = S02.nanmax(axis=0)
         #REB1 Sensors
-        S10XMax, S10YMax = S10.nanmax(axis=0)
-        S11XMax, S11YMax = S11.nanmax(axis=0)
-        S12XMax, S12YMax = S12.nanmax(axis=0)
+        _, S10YMax = S10.nanmax(axis=0)
+        _, S11YMax = S11.nanmax(axis=0)
+        _, S12YMax = S12.nanmax(axis=0)
         #REB2 Sensors
-        S20XMax, S20YMax = S20.nanmax(axis=0)
-        S21XMax, S21YMax = S21.nanmax(axis=0)
-        S22XMax, S22YMax = S22.nanmax(axis=0)
+        _, S20YMax = S20.nanmax(axis=0)
+        _, S21YMax = S21.nanmax(axis=0)
+        _, S22YMax = S22.nanmax(axis=0)
         
         ###########################################################################
         ###Rotate sensors (coordinate transform from PCS to CCS coordinate systems)
         ###########################################################################
         #REB0
-        S00CCS = self.coordTransform(S00, S00YMax)
-        S01CCS = self.coordTransform(S01, S01YMax)
-        S02CCS = self.coordTransform(S02, S02YMax)
+        S00CCS = self._coordTransform(S00, S00YMax)
+        S01CCS = self._coordTransform(S01, S01YMax)
+        S02CCS = self._coordTransform(S02, S02YMax)
         #REB1
-        S10CCS = self.coordTransform(S10, S10YMax)
-        S11CCS = self.coordTransform(S11, S11YMax)
-        S12CCS = self.coordTransform(S12, S12YMax)
+        S10CCS = self._coordTransform(S10, S10YMax)
+        S11CCS = self._coordTransform(S11, S11YMax)
+        S12CCS = self._coordTransform(S12, S12YMax)
         #REB2
-        S20CCS = self.coordTransform(S20, S20YMax)
-        S21CCS = self.coordTransform(S21, S21YMax)
-        S22CCS = self.coordTransform(S22, S22YMax)
+        S20CCS = self._coordTransform(S20, S20YMax)
+        S21CCS = self._coordTransform(S21, S21YMax)
+        S22CCS = self._coordTransform(S22, S22YMax)
         
         ###########################################################################
         ###Place sensors in RSA positions
@@ -206,7 +208,7 @@ class RSA3DPlot(object):
         S11CCS[:,1] + S10CCSYMax #Y
         concatenate((RSAArray, S11CCS))
         #S21 (on top of S20 AND next to S11)
-        S20CCSXMax, S20CCSYMax = S20CCS.nanmax(axis=0)
+        _, S20CCSYMax = S20CCS.nanmax(axis=0)
         S11CCSXMax, S11CCSYMax = S11CCS.nanmax(axis=0)
         S21CCS[:,0] + S11CCSXMax #X (S11X already has S01X added to it)
         S21CCS[:,1] + S20CCSYMax
@@ -215,19 +217,19 @@ class RSA3DPlot(object):
         S02CCS[:,1] + S01CCSYMax #Y (S01Y already has S00Y added to it)
         concatenate((RSAArray, S02CCS))
         #S12 (on top of S10 and S11 AND next to S02)
-        S02CCSXMax, S02CCSYMax = S02CCS.nanmax(axis=0)
+        S02CCSXMax, _ = S02CCS.nanmax(axis=0)
         S12CCS[:,0] + S02CCSXMax #X
         S12CCS[:,1] + S11CCSYMax #Y (S11Y already has S10Y added to it)
         concatenate((RSAArray, S12CCS))
         #S22 (on top of S21 and S20 AND next to S12 and S02)
-        S12CCSXMax, S12CCSYMax = S02CCS.nanmax(axis=0)
-        S21CCSXMax, S21CCSYMax = S21CCS.nanmax(axis=0)
+        S12CCSXMax, _ = S02CCS.nanmax(axis=0)
+        _, S21CCSYMax = S21CCS.nanmax(axis=0)
         S22CCS[:,0] + S12CCSXMax #X (S12X already has S02X added to it)
         S22CCS[:,1] + S21CCSYMax #Y (S21Y already has S20Y added to it)
         
         return RSAArray
         
-    def plotSensors3D(self, RSAArray):
+    def _plotSensors3D(self, RSAArray):
         '''
         Plot RSA sensor array in 3D
         '''
