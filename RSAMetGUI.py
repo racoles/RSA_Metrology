@@ -16,7 +16,7 @@ class RSAMetGUI(object):
     '''
     GUI for RSA Metrology
     '''
-    #Set up empty sensor data lists
+    #Initialize empty sensor data lists
     S00List = []
     S01List = []
     S02List = []

@@ -1,7 +1,7 @@
 '''
 @title RSA3DPlot
 @author: Rebecca Coles
-Updated on Apr 26, 2017
+Updated on Apr 28, 2017
 Created on Apr 14, 2017
 '''
 
@@ -82,9 +82,9 @@ class RSA3DPlot(object):
         ###########################################################################
         #REB0 Sensors
         #S00
-        white = full((S00.shape[0],1), 'w')
-        concatenate((S00, full((S00.shape[0],1), 'S00')), axis=1)
-        concatenate((S00, white), axis=1)        
+        white = full((S00.shape[0],1), 'w', dtype=str)
+        concatenate((S00, full((S00.shape[0],1), 'S00', dtype=str)), axis=1)
+        concatenate((S00, white), axis=1)
         #S01
         purple = full((S01.shape[0],1), '#be63d6')
         concatenate((S01, full((S01.shape[0],1), 'S01')), axis=1)
