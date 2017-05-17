@@ -65,17 +65,17 @@ class RSA3DPlot(object):
         ###Convert from Python list to Numpy array
         ###########################################################################
         #REB0
-        S00 = array(S00List)
-        S01 = array(S01List)
-        S02 = array(S02List)
+        S00 = self._reshape_3D_to_2D(array(S00List))
+        S01 = self._reshape_3D_to_2D(array(S01List))
+        S02 = self._reshape_3D_to_2D(array(S02List))
         #REB1
-        S10 = array(S10List)
-        S11 = array(S11List)
-        S12 = array(S12List)
+        S10 = self._reshape_3D_to_2D(array(S10List))
+        S11 = self._reshape_3D_to_2D(array(S11List))
+        S12 = self._reshape_3D_to_2D(array(S12List))
         #REB2
-        S20 = array(S20List)
-        S21 = array(S21List)
-        S22 = array(S22List)
+        S20 = self._reshape_3D_to_2D(array(S20List))
+        S21 = self._reshape_3D_to_2D(array(S21List))
+        S22 = self._reshape_3D_to_2D(array(S22List))
         
         ###########################################################################
         ###Add Color column for later plotting
@@ -86,40 +86,40 @@ class RSA3DPlot(object):
         concatenate((S00, full((S00.shape[0],1), 'S00', dtype=str)), axis=1)
         concatenate((S00, white), axis=1)
         #S01
-        purple = full((S01.shape[0],1), '#be63d6')
-        concatenate((S01, full((S01.shape[0],1), 'S01')), axis=1)
+        purple = full((S01.shape[0],1), '#be63d6', dtype=str)
+        concatenate((S01, full((S01.shape[0],1), 'S01', dtype=str)), axis=1)
         concatenate((S01, purple), axis=1)
         #S02
-        yellow = full((S02.shape[0],1), 'y')
-        concatenate((S02, full((S02.shape[0],1), 'S02')), axis=1)
+        yellow = full((S02.shape[0],1), 'y', dtype=str)
+        concatenate((S02, full((S02.shape[0],1), 'S02', dtype=str)), axis=1)
         concatenate((S02, yellow), axis=1)
         
         #REB1 Sensors
         #S10
-        cyan = full((S10.shape[0],1), 'c')
-        concatenate((S10, full((S10.shape[0],1), 'S10')), axis=1)
+        cyan = full((S10.shape[0],1), 'c', dtype=str)
+        concatenate((S10, full((S10.shape[0],1), 'S10', dtype=str)), axis=1)
         concatenate((S10, cyan), axis=1)
         #S11
-        blue = full((S11.shape[0],1), 'b')
-        concatenate((S11, full((S11.shape[0],1), 'S11')), axis=1)
+        blue = full((S11.shape[0],1), 'b', dtype=str)
+        concatenate((S11, full((S11.shape[0],1), 'S11', dtype=str)), axis=1)
         concatenate((S11, blue), axis=1)
         #S12
-        orange = full((S12.shape[0],1), '#ffa802')
-        concatenate((S12, full((S12.shape[0],1), 'S12')), axis=1)
+        orange = full((S12.shape[0],1), '#ffa802', dtype=str)
+        concatenate((S12, full((S12.shape[0],1), 'S12', dtype=str)), axis=1)
         concatenate((S12, orange), axis=1)
         
         #REB2 Sensors
         #S20
-        magenta = full((S20.shape[0],1), 'm')
-        concatenate((S20, full((S20.shape[0],1), 'S20')), axis=1)
+        magenta = full((S20.shape[0],1), 'm', dtype=str)
+        concatenate((S20, full((S20.shape[0],1), 'S20', dtype=str)), axis=1)
         concatenate((S20, magenta), axis=1)
         #S21
-        green = full((S21.shape[0],1), 'g')
-        concatenate((S21, full((S21.shape[0],1), 'S21')), axis=1)
+        green = full((S21.shape[0],1), 'g', dtype=str)
+        concatenate((S21, full((S21.shape[0],1), 'S21', dtype=str)), axis=1)
         concatenate((S21, green), axis=1)
         #S22
-        red = full((S22.shape[0],1), 'r')
-        concatenate((S22, full((S22.shape[0],1), 'S22')), axis=1)
+        red = full((S22.shape[0],1), 'r', dtype=str)
+        concatenate((S22, full((S22.shape[0],1), 'S22', dtype=str)), axis=1)
         concatenate((S22, red), axis=1)    
         
         ###########################################################################
@@ -243,3 +243,9 @@ class RSA3DPlot(object):
         #Show plot
         show()
         
+    def _reshape_3D_to_2D(self, numpyArray):
+        '''
+        reshape a 3D numpy array of size (1,#,#) to (#,#)
+        '''
+        if numpyArray.shape[0] == 1:
+            return numpyArray.reshape(numpyArray.shape[1:])
