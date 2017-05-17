@@ -83,60 +83,52 @@ class RSA3DPlot(object):
         #REB0 Sensors
         #S00
         white = full((S00.shape[0],1), 'w', dtype=str)
-        concatenate((S00, full((S00.shape[0],1), 'S00', dtype=str)), axis=1)
-        concatenate((S00, white), axis=1)
+        S00 = concatenate((S00, white), axis=1)
         #S01
         purple = full((S01.shape[0],1), '#be63d6', dtype=str)
-        concatenate((S01, full((S01.shape[0],1), 'S01', dtype=str)), axis=1)
-        concatenate((S01, purple), axis=1)
+        S01 = concatenate((S01, purple), axis=1)
         #S02
         yellow = full((S02.shape[0],1), 'y', dtype=str)
-        concatenate((S02, full((S02.shape[0],1), 'S02', dtype=str)), axis=1)
-        concatenate((S02, yellow), axis=1)
+        S02 = concatenate((S02, yellow), axis=1)
         
         #REB1 Sensors
         #S10
         cyan = full((S10.shape[0],1), 'c', dtype=str)
-        concatenate((S10, full((S10.shape[0],1), 'S10', dtype=str)), axis=1)
-        concatenate((S10, cyan), axis=1)
+        S10 = concatenate((S10, cyan), axis=1)
         #S11
         blue = full((S11.shape[0],1), 'b', dtype=str)
-        concatenate((S11, full((S11.shape[0],1), 'S11', dtype=str)), axis=1)
-        concatenate((S11, blue), axis=1)
+        S11 = concatenate((S11, blue), axis=1)
         #S12
         orange = full((S12.shape[0],1), '#ffa802', dtype=str)
-        concatenate((S12, full((S12.shape[0],1), 'S12', dtype=str)), axis=1)
-        concatenate((S12, orange), axis=1)
+        S12 = concatenate((S12, orange), axis=1)
         
         #REB2 Sensors
         #S20
         magenta = full((S20.shape[0],1), 'm', dtype=str)
-        concatenate((S20, full((S20.shape[0],1), 'S20', dtype=str)), axis=1)
-        concatenate((S20, magenta), axis=1)
+        S20 = concatenate((S20, magenta), axis=1)
         #S21
         green = full((S21.shape[0],1), 'g', dtype=str)
-        concatenate((S21, full((S21.shape[0],1), 'S21', dtype=str)), axis=1)
-        concatenate((S21, green), axis=1)
+        S21 = concatenate((S21, green), axis=1)
         #S22
         red = full((S22.shape[0],1), 'r', dtype=str)
-        concatenate((S22, full((S22.shape[0],1), 'S22', dtype=str)), axis=1)
-        concatenate((S22, red), axis=1)    
+        S22 = concatenate((S22, red), axis=1)    
         
         ###########################################################################
-        ###Find max/min (this will be used to coordinate transform the sensor from PCS to CCS)
+        ###Find max (this will be used to coordinate transform the sensor from PCS to CCS)
         ###########################################################################
         #REB0 Sensors
-        _, S00YMax = S00.nanmax(axis=0)
-        _, S01YMax = S01.nanmax(axis=0)
-        _, S02YMax = S02.nanmax(axis=0)
+        print(S00)
+        _, S00YMax, _, _ = S00.nanmax(axis=0)
+        _, S01YMax, _, _  = S01.nanmax(axis=0)
+        _, S02YMax, _, _  = S02.nanmax(axis=0)
         #REB1 Sensors
-        _, S10YMax = S10.nanmax(axis=0)
-        _, S11YMax = S11.nanmax(axis=0)
-        _, S12YMax = S12.nanmax(axis=0)
+        _, S10YMax, _, _  = S10.nanmax(axis=0)
+        _, S11YMax, _, _  = S11.nanmax(axis=0)
+        _, S12YMax, _, _  = S12.nanmax(axis=0)
         #REB2 Sensors
-        _, S20YMax = S20.nanmax(axis=0)
-        _, S21YMax = S21.nanmax(axis=0)
-        _, S22YMax = S22.nanmax(axis=0)
+        _, S20YMax, _, _  = S20.nanmax(axis=0)
+        _, S21YMax, _, _  = S21.nanmax(axis=0)
+        _, S22YMax, _, _  = S22.nanmax(axis=0)
         
         ###########################################################################
         ###Rotate sensors (coordinate transform from PCS to CCS coordinate systems)
