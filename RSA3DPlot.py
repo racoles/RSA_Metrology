@@ -163,6 +163,10 @@ class RSA3DPlot(object):
         ###########################################################################
         savetxt(timestr, RSAArray, fmt=['%.7f','%.7f','%.7f','%.0f'], delimiter=',')
 
+        ###########################################################################
+        ###Plot Virtual RSA
+        ###########################################################################
+        
     def manualPlacement(self, S00CCS, S01CCS, S02CCS, S10CCS, S11CCS, S12CCS, S20CCS, S21CCS, S22CCS):
         '''
         Manually Place sensors in RSA positions
@@ -222,7 +226,7 @@ class RSA3DPlot(object):
         
         return RSAArray
         
-    def _plotSensors3D(self, RSAArray):
+    def _plotSensors3D(self, RSAArray, colorList):
         '''
         Plot RSA sensor array in 3D
         '''
