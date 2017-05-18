@@ -161,7 +161,7 @@ class RSA3DPlot(object):
         ###########################################################################
         ###Save virtual RSA to text file
         ###########################################################################
-        savetxt(timestr, RSAArray, delimiter=',')
+        savetxt(timestr, RSAArray, fmt=['%.7f','%.7f','%.7f','%.0f'], delimiter=',')
 
     def manualPlacement(self, S00CCS, S01CCS, S02CCS, S10CCS, S11CCS, S12CCS, S20CCS, S21CCS, S22CCS):
         '''
