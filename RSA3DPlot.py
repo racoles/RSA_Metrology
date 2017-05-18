@@ -6,7 +6,7 @@ Created on Apr 14, 2017
 '''
 
 # Import #######################################################################################
-from numpy import array, full, concatenate, copy, empty, savetxt
+from numpy import array, full, concatenate, copy, empty, savetxt, nanmax
 import time
 #from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.pyplot import figure, show
@@ -82,53 +82,56 @@ class RSA3DPlot(object):
         ###########################################################################
         #REB0 Sensors
         #S00
-        white = full((S00.shape[0],1), 'w', dtype=str)
+        white = full((S00.shape[0],1), 0)
         S00 = concatenate((S00, white), axis=1)
         #S01
-        purple = full((S01.shape[0],1), '#be63d6', dtype=str)
+        purple = full((S01.shape[0],1), 1) # #be63d6
         S01 = concatenate((S01, purple), axis=1)
         #S02
-        yellow = full((S02.shape[0],1), 'y', dtype=str)
+        yellow = full((S02.shape[0],1), 2)
         S02 = concatenate((S02, yellow), axis=1)
         
         #REB1 Sensors
         #S10
-        cyan = full((S10.shape[0],1), 'c', dtype=str)
+        cyan = full((S10.shape[0],1), 3)
         S10 = concatenate((S10, cyan), axis=1)
         #S11
-        blue = full((S11.shape[0],1), 'b', dtype=str)
+        blue = full((S11.shape[0],1), 4)
         S11 = concatenate((S11, blue), axis=1)
         #S12
-        orange = full((S12.shape[0],1), '#ffa802', dtype=str)
+        orange = full((S12.shape[0],1), 5) # #ffa802
         S12 = concatenate((S12, orange), axis=1)
         
         #REB2 Sensors
         #S20
-        magenta = full((S20.shape[0],1), 'm', dtype=str)
+        magenta = full((S20.shape[0],1), 6)
         S20 = concatenate((S20, magenta), axis=1)
         #S21
-        green = full((S21.shape[0],1), 'g', dtype=str)
+        green = full((S21.shape[0],1), 7)
         S21 = concatenate((S21, green), axis=1)
         #S22
-        red = full((S22.shape[0],1), 'r', dtype=str)
-        S22 = concatenate((S22, red), axis=1)    
+        red = full((S22.shape[0],1), 8)
+        S22 = concatenate((S22, red), axis=1)
+        
+        self.colorList = [['S00', 'w'], ['S01', '#be63d6'], ['S02', 'y'], 
+                          ['S10', 'c'], ['S11', 'b'], ['S12', '#ffa802'],
+                          ['S20', 'm'], ['S21', 'g'], ['S22', 'r']]
         
         ###########################################################################
         ###Find max (this will be used to coordinate transform the sensor from PCS to CCS)
         ###########################################################################
         #REB0 Sensors
-        print(S00)
-        _, S00YMax, _, _ = S00.nanmax(axis=0)
-        _, S01YMax, _, _  = S01.nanmax(axis=0)
-        _, S02YMax, _, _  = S02.nanmax(axis=0)
+        _, S00YMax, _, _  = nanmax(S00, axis=0)
+        _, S01YMax, _, _  = nanmax(S01, axis=0)
+        _, S02YMax, _, _  = nanmax(S02, axis=0)
         #REB1 Sensors
-        _, S10YMax, _, _  = S10.nanmax(axis=0)
-        _, S11YMax, _, _  = S11.nanmax(axis=0)
-        _, S12YMax, _, _  = S12.nanmax(axis=0)
+        _, S10YMax, _, _  = nanmax(S10, axis=0)
+        _, S11YMax, _, _  = nanmax(S11, axis=0)
+        _, S12YMax, _, _  = nanmax(S12, axis=0)
         #REB2 Sensors
-        _, S20YMax, _, _  = S20.nanmax(axis=0)
-        _, S21YMax, _, _  = S21.nanmax(axis=0)
-        _, S22YMax, _, _  = S22.nanmax(axis=0)
+        _, S20YMax, _, _  = nanmax(S20, axis=0)
+        _, S21YMax, _, _  = nanmax(S21, axis=0)
+        _, S22YMax, _, _  = nanmax(S22, axis=0)
         
         ###########################################################################
         ###Rotate sensors (coordinate transform from PCS to CCS coordinate systems)
