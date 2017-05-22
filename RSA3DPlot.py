@@ -8,8 +8,8 @@ Created on Apr 14, 2017
 # Import #######################################################################################
 from numpy import array, full, concatenate, copy, empty, savetxt, nanmax
 import time
-#from mpl_toolkits.mplot3d import Axes3D
-from matplotlib.pyplot import figure, show
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.pyplot as plt
 ################################################################################################
 
 class RSA3DPlot(object):
@@ -116,7 +116,6 @@ class RSA3DPlot(object):
         self.colorList = [['S00', 'w'], ['S01', '#be63d6'], ['S02', 'y'], 
                           ['S10', 'c'], ['S11', 'b'], ['S12', '#ffa802'],
                           ['S20', 'm'], ['S21', 'g'], ['S22', 'r']]
-        
         ###########################################################################
         ###Find max (this will be used to coordinate transform the sensor from PCS to CCS)
         ###########################################################################
@@ -166,7 +165,8 @@ class RSA3DPlot(object):
         ###########################################################################
         ###Plot Virtual RSA
         ###########################################################################
-        
+        self._plotSensors3D(RSAArray, self.colorList)        
+                
     def manualPlacement(self, S00CCS, S01CCS, S02CCS, S10CCS, S11CCS, S12CCS, S20CCS, S21CCS, S22CCS):
         '''
         Manually Place sensors in RSA positions
@@ -231,17 +231,17 @@ class RSA3DPlot(object):
         Plot RSA sensor array in 3D
         '''
         #Set up figure
-        fig = figure()
+        fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
         #Plot points (loop is used to make sure that sensor points are the proper colors)
         for ii in range(0,RSAArray.shape[0]-1):
-            ax.scatter(RSAArray[ii,0], RSAArray[ii,1], RSAArray[ii,2], c=RSAArray[ii,3], marker='o')
+            ax.scatter(RSAArray[ii,0], RSAArray[ii,1], RSAArray[ii,2], c=colorList[int(RSAArray[ii,3])][1], marker='o')
         #Label axis
         ax.set_xlabel('X')
         ax.set_ylabel('Y')
         ax.set_zlabel('Z')
         #Show plot
-        show()
+        plt.show()
         
     def _reshape_3D_to_2D(self, numpyArray):
         '''
