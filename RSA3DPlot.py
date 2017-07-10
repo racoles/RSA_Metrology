@@ -38,12 +38,12 @@ class RSA3DPlot(object):
         Y(CCS) = Y(PCS)MAX - Y(PCS)
         '''
         #Coordinate transform Y values
-        #yValues = copy(sensorPCS[:,1])
-        #yValues = [Ymax-yy for yy in yValues]
+        yValues = copy(sensorPCS[:,1])
+        yValues = [Ymax-yy for yy in yValues]
         #Insert CCS Y coordinates into array
-        #sensorCCS = copy(sensorPCS)
-        #sensorCCS[:,1] = yValues
-        #return sensorCCS
+        sensorCCS = copy(sensorPCS)
+        sensorCCS[:,1] = yValues
+        return sensorCCS
         
     def _coordTransformSensorMCS(self, sensorPCS, Xmax, Ymax):
         '''
