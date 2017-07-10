@@ -375,7 +375,7 @@ class RSA3DPlot(object):
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
         #Plot points (loop is used to make sure that sensor points are the proper colors)
-        for ii in range(0,RSAArray.shape[0]-1):
+        for ii in range(0,RSAArray.shape[0]-1, 10):
             ax.scatter(RSAArray[ii,0], RSAArray[ii,1], RSAArray[ii,2], c=colorList[int(RSAArray[ii,3])][1], marker='o')
         #Label axis
         ax.set_xlabel('X')
@@ -385,11 +385,6 @@ class RSA3DPlot(object):
         plt.gca().set_xlim(left=0)
         plt.gca().set_ylim(bottom=0)
         #Move Y axis to oposite side
-        #tmp_planes = ax.zaxis._PLANES 
-        #ax.zaxis._PLANES = ( tmp_planes[2], tmp_planes[3], 
-        #             tmp_planes[0], tmp_planes[1], 
-        #             tmp_planes[4], tmp_planes[5])
-        #
         ax.view_init(ax.elev, ax.azim+270)
         #Flip Z axis
         #ax.invert_zaxis()
