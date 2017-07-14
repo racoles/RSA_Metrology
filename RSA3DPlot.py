@@ -89,7 +89,7 @@ class RSA3DPlot(object):
         Y(CCS) = Y(PCS)MAX - Y(PCS)
         '''
     
-    def createVirtualRSA(self, S00List, S01List, S02List, S10List, S11List, S12List, S20List, S21List, S22List, ManualOrAutoBOOL):
+    def createVirtualRSA(self, S00List, S01List, S02List, S10List, S11List, S12List, S20List, S21List, S22List, ManualOrAutoBOOL, datumPlaneEntry, raftFitEntry):
         '''
         Align data based on the sensor positions on the RSA.
         
@@ -397,3 +397,8 @@ class RSA3DPlot(object):
         '''
         if numpyArray.shape[0] == 1:
             return numpyArray.reshape(numpyArray.shape[1:])
+        
+    def _subtractRaftData(self, datumPlaneEntry, raftFitEntry):
+        '''
+        Subtract Datum Plane Equation from Raft Plane Equation
+        '''

@@ -107,7 +107,7 @@ class RSAMetGUI(object):
         manualPosition = Button(master, text = "Plot virtual RSA for manually selected sensor positions", 
                                 command=lambda:RSA3DPlot().createVirtualRSA(RSAMetGUI.S00List, RSAMetGUI.S01List, RSAMetGUI.S02List, 
                                                                             RSAMetGUI.S10List, RSAMetGUI.S11List, RSAMetGUI.S12List, 
-                                                                            RSAMetGUI.S20List, RSAMetGUI.S21List, RSAMetGUI.S22List, 0))
+                                                                            RSAMetGUI.S20List, RSAMetGUI.S21List, RSAMetGUI.S22List, 0, datumPlaneEntry, raftFitEntry))
         manualPosition.grid(row=15, column=0, columnspan=3, sticky='W')
         
         #Plot RSA for optimal sensor positions
