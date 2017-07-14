@@ -404,5 +404,5 @@ class RSA3DPlot(object):
         '''
         #Remove spaces from String
         #Split string into array
-        #Matrix subtraction (raft - datum plane
+        #Matrix subtraction (raft - datum plane)
         #Return 1x3 array
