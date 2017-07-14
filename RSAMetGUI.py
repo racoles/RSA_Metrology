@@ -8,6 +8,7 @@ Created on Apr 4, 2017
 # Import #######################################################################################
 import ntpath
 from tkinter import Button, filedialog, PhotoImage, Label, Entry, StringVar
+from tkinter.ttk import Separator, Style
 from openpyxl import load_workbook
 from RSA3DPlot import RSA3DPlot
 ################################################################################################
@@ -78,17 +79,22 @@ class RSAMetGUI(object):
         
         #Grid Spacing
         spaceLabel1 = Label(master, text=" ").grid(row=3, column=0)
-        spaceLabel2 = Label(master, text=" ").grid(row=4, column=0)
+        #spaceLabel2 = Label(master, text=" ").grid(row=4, column=0)
         spaceLabel3 = Label(master, text=" ").grid(row=10, column=0)
+        
+        #Grid Separator
+        sep = Separator(master, orient="horizontal").grid(row=4, column=0, columnspan=4, sticky='ew')
+        sty = Style(master)
+        sty.configure("TSeparator", background="black")
         
         #Datum Plane Text Box
         datumPlaneEqn = StringVar()
-        datumPlaneLabel = Label(master, text="Enter Datum Plane Equation (optional)").grid(row=6, column=0, columnspan=2, sticky='W')
+        datumPlaneLabel = Label(master, text="Enter Datum Plane Equation (optional, but must also provide Raft Fit Equation)").grid(row=6, column=0, columnspan=2, sticky='W')
         datumPlaneEntry = Entry(master, textvariable=datumPlaneEqn).grid(row=7, column=0, columnspan=2, sticky='W')
         
         #Raft Fit Text Box
         raftFitEqn = StringVar()
-        raftFitLabel = Label(master, text="Enter Raft Fit Equation (optional)").grid(row=8, column=0, columnspan=2, sticky='W')
+        raftFitLabel = Label(master, text="Enter Raft Fit Equation (optional, but must also provide Datum Plane Equation)").grid(row=8, column=0, columnspan=2, sticky='W')
         raftFitEntry = Entry(master, textvariable=raftFitEqn).grid(row=9, column=0, columnspan=2, sticky='W')
         
         #Plot RSA for manually selected sensor positions
