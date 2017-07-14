@@ -402,3 +402,7 @@ class RSA3DPlot(object):
         '''
         Subtract Datum Plane Equation from Raft Plane Equation
         '''
+        #Remove spaces from String
+        #Split string into array
+        #Matrix subtraction (raft - datum plane
+        #Return 1x3 array
