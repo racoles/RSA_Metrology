@@ -79,35 +79,36 @@ class RSAMetGUI(object):
         
         #Grid Spacing
         spaceLabel1 = Label(master, text=" ").grid(row=3, column=0)
-        spaceLabel2 = Label(master, text=" ").grid(row=6, column=0)
-        spaceLabel3 = Label(master, text=" ").grid(row=11, column=0)
-        spaceLabel4 = Label(master, text=" ").grid(row=14, column=0)
+        spaceLabel2 = Label(master, text=" ").grid(row=7, column=0)
+        spaceLabel3 = Label(master, text=" ").grid(row=12, column=0)
+        spaceLabel4 = Label(master, text=" ").grid(row=15, column=0)
         
         #Grid Separator
         sep = Separator(master, orient="horizontal").grid(row=4, column=0, columnspan=4, sticky='ew')
-        sep = Separator(master, orient="horizontal").grid(row=12, column=0, columnspan=4, sticky='ew')
+        sep = Separator(master, orient="horizontal").grid(row=13, column=0, columnspan=4, sticky='ew')
         sty = Style(master)
         sty.configure("TSeparator", background="black")
         
         #Labels
         raftDataLabel = Label(master, text="Raft Plane Equations (optional)").grid(row=5, column=0, columnspan=2, sticky='W')
-        processDataLabel = Label(master, text="Process and Plot Data").grid(row=13, column=0, columnspan=2, sticky='W')
+        raftDataLabel2 = Label(master, text="Ex:    53.0234 + 0.0010629 x + 0.00322188 y").grid(row=6, column=0, columnspan=2, sticky='W')
+        processDataLabel = Label(master, text="Process and Plot Data").grid(row=14, column=0, columnspan=2, sticky='W')
         
         #Datum Plane Text Box
         datumPlaneEqn = StringVar()
-        datumPlaneLabel = Label(master, text="Enter Datum Plane Equation (must also provide Raft Fit Equation)").grid(row=7, column=0, columnspan=2, sticky='W')
-        datumPlaneEntry = Entry(master, textvariable=datumPlaneEqn).grid(row=8, column=0, columnspan=2, sticky='W')
+        datumPlaneLabel = Label(master, text="Enter Datum Plane Equation (must also provide Raft Fit Equation)").grid(row=8, column=0, columnspan=2, sticky='W')
+        datumPlaneEntry = Entry(master, textvariable=datumPlaneEqn).grid(row=9, column=0, columnspan=3, sticky='W')
         
         #Raft Fit Text Box
         raftFitEqn = StringVar()
-        raftFitLabel = Label(master, text="Enter Raft Fit Equation (must also provide Datum Plane Equation)").grid(row=9, column=0, columnspan=2, sticky='W')
-        raftFitEntry = Entry(master, textvariable=raftFitEqn).grid(row=10, column=0, columnspan=2, sticky='W')
+        raftFitLabel = Label(master, text="Enter Raft Fit Equation (must also provide Datum Plane Equation)").grid(row=10, column=0, columnspan=2, sticky='W')
+        raftFitEntry = Entry(master, textvariable=raftFitEqn).grid(row=11, column=0, columnspan=3, sticky='W')
         
         #Plot RSA for manually selected sensor positions
         manualPosition = Button(master, text = "Plot virtual RSA for manually selected sensor positions", 
                                 command=lambda:RSA3DPlot().createVirtualRSA(RSAMetGUI.S00List, RSAMetGUI.S01List, RSAMetGUI.S02List, 
                                                                             RSAMetGUI.S10List, RSAMetGUI.S11List, RSAMetGUI.S12List, 
-                                                                            RSAMetGUI.S20List, RSAMetGUI.S21List, RSAMetGUI.S22List, 0, datumPlaneEntry, raftFitEntry))
+                                                                            RSAMetGUI.S20List, RSAMetGUI.S21List, RSAMetGUI.S22List, 0, datumPlaneEqn, raftFitEqn))
         manualPosition.grid(row=15, column=0, columnspan=3, sticky='W')
         
         #Plot RSA for optimal sensor positions

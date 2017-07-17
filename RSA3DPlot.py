@@ -7,8 +7,9 @@ Created on Apr 14, 2017
 
 # Import #######################################################################################
 from numpy import array, full, concatenate, copy, empty, savetxt, nanmax
-import time
+from re import findall
 from mpl_toolkits.mplot3d import Axes3D
+import time
 import matplotlib.pyplot as plt
 ################################################################################################
 
@@ -89,7 +90,7 @@ class RSA3DPlot(object):
         Y(CCS) = Y(PCS)MAX - Y(PCS)
         '''
     
-    def createVirtualRSA(self, S00List, S01List, S02List, S10List, S11List, S12List, S20List, S21List, S22List, ManualOrAutoBOOL, datumPlaneEntry, raftFitEntry):
+    def createVirtualRSA(self, S00List, S01List, S02List, S10List, S11List, S12List, S20List, S21List, S22List, ManualOrAutoBOOL, datumPlaneEqn, raftFitEqn):
         '''
         Align data based on the sensor positions on the RSA.
         
@@ -240,6 +241,12 @@ class RSA3DPlot(object):
             RSAArray = self.manualPlacementMCS(S00CCS, S01CCS, S02CCS, S10CCS, S11CCS, S12CCS, S20CCS, S21CCS, S22CCS)
             timestr = time.strftime("%Y%m%d-%H%M%S") + '_manually_placed_virtualRSA.csv'
         #elif ManualOrAutoBOOL == 1:
+        
+        ###########################################################################
+        ###Subtract Raft Baseplate
+        ###########################################################################
+        #suntract the datum plane eqn from the raft fit eqn.
+        raftBaseplateEqn = self._subtractRaftData(datumPlaneEqn, raftFitEqn)
         
         ###########################################################################
         ###Save virtual RSA to text file
@@ -393,16 +400,22 @@ class RSA3DPlot(object):
         
     def _reshape_3D_to_2D(self, numpyArray):
         '''
-        reshape a 3D numpy array of size (1,#,#) to (#,#)
+        Reshape a 3D numpy array of size (1,#,#) to (#,#)
         '''
         if numpyArray.shape[0] == 1:
             return numpyArray.reshape(numpyArray.shape[1:])
         
-    def _subtractRaftData(self, datumPlaneEntry, raftFitEntry):
+    def _subtractRaftData(self, datumPlaneEqn, raftFitEqn):
         '''
         Subtract Datum Plane Equation from Raft Plane Equation
         '''
-        #Remove spaces from String
+        #Remove spaces from strings
+            #datumPlaneEntry.replace(" ", "")
+            #raftFitEntry.replace(" ", "")
         #Split string into array
+        #datumPlaneArray = findall('\d+', datumPlaneEntry.get())
+        #raftFitArray = findall('\d+', raftFitEqn.get())
+        print(datumPlaneEqn.get())
+        print(raftFitEqn.get())
         #Matrix subtraction (raft - datum plane)
         #Return 1x3 array
