@@ -244,18 +244,17 @@ class RSA3DPlot(object):
         #elif ManualOrAutoBOOL == 1:
         
         ###########################################################################
-        ###Subtract Raft Baseplate from Virtual RSA
+        ###Subtract Raft Base Plate from Virtual RSA
         ###########################################################################
         #Subtract the datum plane eqn from the raft fit eqn.
         raftBasePlateEqn = self._subtractRaftData(datumPlaneEqn, raftFitEqn)
         #Create raft plane
-        #Note: raftBasePlateEqn is an array like [a,b,c] where: z = a + bx +cy
+            #Note: raftBasePlateEqn is an array like [a,b,c] where: z = a + bx +cy
         raftPlane = []
         for ii in range(0,(len(RSAArray)-1)):
             raftPlane.append([raftBasePlateEqn[0] + raftBasePlateEqn[1]*RSAArray[ii,0] + raftBasePlateEqn[2]*RSAArray[ii,1]])
-        print(raftPlane)
         #Subtract Raft Base Plate Plane from Virtual RSA
-        
+################        
         
         ###########################################################################
         ###Save virtual RSA to text file
