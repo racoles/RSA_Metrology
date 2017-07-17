@@ -9,6 +9,7 @@ Created on Apr 14, 2017
 from numpy import array, full, concatenate, copy, empty, savetxt, nanmax
 from re import findall
 from mpl_toolkits.mplot3d import Axes3D
+from numpy import array
 import time
 import matplotlib.pyplot as plt
 ################################################################################################
@@ -409,13 +410,17 @@ class RSA3DPlot(object):
         '''
         Subtract Datum Plane Equation from Raft Plane Equation
         '''
-        #Remove spaces from strings
-            #datumPlaneEntry.replace(" ", "")
-            #raftFitEntry.replace(" ", "")
-        #Split string into array
-        #datumPlaneArray = findall('\d+', datumPlaneEntry.get())
-        #raftFitArray = findall('\d+', raftFitEqn.get())
-        print(datumPlaneEqn.get())
-        print(raftFitEqn.get())
-        #Matrix subtraction (raft - datum plane)
-        #Return 1x3 array
+        if datumPlaneEqn.get().strip() and raftFitEqn.get().strip():
+            #Split string into array
+            datumPlaneArray = findall(r"[-+]?\d*\.\d+|\d+", datumPlaneEqn.get())
+            raftFitArray = findall(r"[-+]?\d*\.\d+|\d+", raftFitEqn.get())
+            print(datumPlaneArray)
+            print(raftFitArray)
+            #Matrix subtraction (raft - datum plane)
+            raft, datum = array(raftFitArray), array(datumPlaneArray) #convert to numpy array
+            result = raft - datum
+            print(result)
+            #Return 1x3 array
+            return result
+        else:
+            return [0,0,0]
