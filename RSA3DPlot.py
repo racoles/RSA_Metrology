@@ -248,8 +248,14 @@ class RSA3DPlot(object):
         ###########################################################################
         #Subtract the datum plane eqn from the raft fit eqn.
         raftBasePlateEqn = self._subtractRaftData(datumPlaneEqn, raftFitEqn)
-        #Create Raft Base Plate Plane 
+        #Create raft plane
+        #Note: raftBasePlateEqn is an array like [a,b,c] where: z = a + bx +cy
+        raftPlane = []
+        for ii in range(0,(len(RSAArray)-1)):
+            raftPlane.append([raftBasePlateEqn[0] + raftBasePlateEqn[1]*RSAArray[ii,0] + raftBasePlateEqn[2]*RSAArray[ii,1]])
+        print(raftPlane)
         #Subtract Raft Base Plate Plane from Virtual RSA
+        
         
         ###########################################################################
         ###Save virtual RSA to text file

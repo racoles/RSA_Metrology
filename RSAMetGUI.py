@@ -1,7 +1,7 @@
 '''
 @title RSAMetGUI
 @author: Rebecca Coles
-Updated on Apr 28, 2017
+Updated on July 17, 2017
 Created on Apr 4, 2017
 '''
 
