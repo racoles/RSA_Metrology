@@ -97,12 +97,12 @@ class RSAMetGUI(object):
         #Datum Plane Text Box
         datumPlaneEqn = StringVar()
         datumPlaneLabel = Label(master, text="Enter Datum Plane Equation (must also provide Raft Fit Equation)").grid(row=8, column=0, columnspan=2, sticky='W')
-        datumPlaneEntry = Entry(master, textvariable=datumPlaneEqn).grid(row=9, column=0, columnspan=3, sticky='W')
+        datumPlaneEntry = Entry(master, textvariable=datumPlaneEqn, width=40).grid(row=9, column=0, columnspan=3, sticky='W')
         
         #Raft Fit Text Box
         raftFitEqn = StringVar()
         raftFitLabel = Label(master, text="Enter Raft Fit Equation (must also provide Datum Plane Equation)").grid(row=10, column=0, columnspan=2, sticky='W')
-        raftFitEntry = Entry(master, textvariable=raftFitEqn).grid(row=11, column=0, columnspan=3, sticky='W')
+        raftFitEntry = Entry(master, textvariable=raftFitEqn, width=40).grid(row=11, column=0, columnspan=3, sticky='W')
         
         #Plot RSA for manually selected sensor positions
         manualPosition = Button(master, text = "Plot virtual RSA for manually selected sensor positions", 
