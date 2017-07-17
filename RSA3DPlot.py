@@ -414,12 +414,9 @@ class RSA3DPlot(object):
             #Split string into array
             datumPlaneArray = findall(r"[-+]?\d*\.\d+|\d+", datumPlaneEqn.get())
             raftFitArray = findall(r"[-+]?\d*\.\d+|\d+", raftFitEqn.get())
-            print(datumPlaneArray)
-            print(raftFitArray)
             #Matrix subtraction (raft - datum plane)
-            raft, datum = array(raftFitArray), array(datumPlaneArray) #convert to numpy array
+            raft, datum = array(raftFitArray, dtype=float), array(datumPlaneArray, dtype=float) #convert to numpy array
             result = raft - datum
-            print(result)
             #Return 1x3 array
             return result
         else:
