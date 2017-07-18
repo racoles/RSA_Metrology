@@ -250,8 +250,8 @@ class RSA3DPlot(object):
         raftBasePlateEqn = self._subtractRaftData(datumPlaneEqn, raftFitEqn)
         ##Subtract Raft Base Plate Plane from Virtual RSA
             #Note: raftBasePlateEqn is an array like [a,b,c] where: z = a + bx +cy
-        for ii in range(0,(len(RSAArray)-1)):
-            RSAArray[ii,2] = RSAArray[ii,2] - (raftBasePlateEqn[0] + raftBasePlateEqn[1]*RSAArray[ii,0] + raftBasePlateEqn[2]*RSAArray[ii,1])
+        for ii in range(0,(len(RSAArray))):
+            RSAArray[ii,2] = RSAArray[ii,2] + (raftBasePlateEqn[0] + raftBasePlateEqn[1]*RSAArray[ii,0] + raftBasePlateEqn[2]*RSAArray[ii,1])
 
         ###########################################################################
         ###Save virtual RSA to text file
