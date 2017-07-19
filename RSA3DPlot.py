@@ -27,14 +27,17 @@ class RSA3DPlot(object):
         
     def _coordTransformSensorMCS(self, sensorPCS, Xmax, Ymax):
         '''
-        Perform coordinate transform from PCS coordinate system to CCS coordinate system for Sensors (180 degree rotation).
-                 +X<---MCS
-             __________  |
-            |        o | +Y
+        Perform coordinate transform a sensor from PCS coordinate 
+        system to CCS coordinate system for Sensors (180 degree rotation).
+        
+         CCS---> +X <---MCS
+         |   __________   |
+         +Y |        o |  +Y
             |          |
             |          |  
-         +Y |          |
-         |  |_o______o_|
+            |          |
+         +Y |_o______o_|
+         |
         PCS --->+X
         
         X(CCS) = X(PCS)
@@ -53,7 +56,8 @@ class RSA3DPlot(object):
         sensorMCS[:,1] = yValues
         return sensorMCS
     
-    def createVirtualRSA(self, S00List, S01List, S02List, S10List, S11List, S12List, S20List, S21List, S22List, ManualOrAutoBOOL, datumPlaneEqn, raftFitEqn):
+    def createVirtualRSA(self, S00List, S01List, S02List, S10List, S11List, S12List, S20List, S21List, S22List, 
+                         ManualOrAutoBOOL, datumPlaneEqn, raftFitEqn):
         '''
         Align data based on the sensor positions on the RSA.
         
