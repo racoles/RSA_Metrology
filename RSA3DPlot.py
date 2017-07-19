@@ -6,9 +6,10 @@ Created on Apr 14, 2017
 '''
 
 # Import #######################################################################################
-from numpy import array, full, concatenate, copy, empty, savetxt, nanmax
+from numpy import array, full, concatenate, copy, empty, savetxt, nanmax, nanmin
 from re import findall
 from mpl_toolkits.mplot3d import Axes3D
+from statistics import median
 import time
 import matplotlib.pyplot as plt
 ################################################################################################
@@ -253,6 +254,7 @@ class RSA3DPlot(object):
         '''
         #Set up figure
         fig = plt.figure()
+#####        #ax = Axes3D(fig)
         ax = fig.add_subplot(111, projection='3d')
         #Plot every tenth point (loop is used to make sure that sensor points are the proper colors)
         for ii in range(0,RSAArray.shape[0]-1, 10):
@@ -266,6 +268,13 @@ class RSA3DPlot(object):
         plt.gca().set_ylim(bottom=0)
         #Move Y axis to opposite side
         ax.view_init(ax.elev, ax.azim+270)
+        #Add raft labels (X+, X-, Y+, Y-)
+        XMax, YMax, _, _ = nanmax(RSAArray, axis=0)
+        _, _, ZMin, _ = nanmin(RSAArray, axis=0)
+        ax.text(median(RSAArray[:,0]), 0, ZMin, '-Y', size=20, zorder=1, color='k') #-Y
+        ax.text(0, median(RSAArray[:,1]), ZMin, '+X', size=20, zorder=1, color='k') #+X
+        ax.text(median(RSAArray[:,0]), YMax, ZMin, '+Y', size=20, zorder=1, color='k') #+Y
+        ax.text(XMax, median(RSAArray[:,1]), ZMin,  '-X', size=20, zorder=1, color='k') #-X
         #Show plot
         plt.show()
         
