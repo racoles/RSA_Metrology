@@ -9,7 +9,6 @@ Created on Apr 14, 2017
 from numpy import array, full, concatenate, copy, empty, savetxt, nanmax
 from re import findall
 from mpl_toolkits.mplot3d import Axes3D
-from numpy import array
 import time
 import matplotlib.pyplot as plt
 ################################################################################################
@@ -18,6 +17,8 @@ class RSA3DPlot(object):
     '''
     3D plot RSA data
     '''
+    #Znom is the height that the sensor height is measured relative to.
+    znom = 13000 #13mm
 
     def __init__(self):
         '''
@@ -248,10 +249,11 @@ class RSA3DPlot(object):
         ###########################################################################
         #Subtract the datum plane eqn from the raft fit eqn.
         raftBasePlateEqn = self._subtractRaftData(datumPlaneEqn, raftFitEqn)
-        ##Subtract Raft Base Plate Plane from Virtual RSA
+        ##Add Raft Base Plate Plane to Virtual RSA
             #Note: raftBasePlateEqn is an array like [a,b,c] where: z = a + bx +cy
         for ii in range(0,(len(RSAArray))):
-            RSAArray[ii,2] = RSAArray[ii,2] + (raftBasePlateEqn[0] + raftBasePlateEqn[1]*RSAArray[ii,0] + raftBasePlateEqn[2]*RSAArray[ii,1])
+            RSAArray[ii,2] = (RSAArray[ii,2] + self.znom) 
+            + (raftBasePlateEqn[0] + raftBasePlateEqn[1]*RSAArray[ii,0] + raftBasePlateEqn[2]*RSAArray[ii,1])
 
         ###########################################################################
         ###Save virtual RSA to text file
@@ -390,9 +392,9 @@ class RSA3DPlot(object):
         for ii in range(0,RSAArray.shape[0]-1, 10):
             ax.scatter(RSAArray[ii,0], RSAArray[ii,1], RSAArray[ii,2], c=colorList[int(RSAArray[ii,3])][1], marker='o')
         #Label axis
-        ax.set_xlabel('X')
-        ax.set_ylabel('Y')
-        ax.set_zlabel('Z')
+        ax.set_xlabel('X (mm)')
+        ax.set_ylabel('Y (mm)')
+        ax.set_zlabel('Z (um)')
         #Set limits
         plt.gca().set_xlim(left=0)
         plt.gca().set_ylim(bottom=0)
