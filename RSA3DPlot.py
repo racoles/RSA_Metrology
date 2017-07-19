@@ -251,9 +251,10 @@ class RSA3DPlot(object):
         raftBasePlateEqn = self._subtractRaftData(datumPlaneEqn, raftFitEqn)
         ##Add Raft Base Plate Plane to Virtual RSA
             #Note: raftBasePlateEqn is an array like [a,b,c] where: z = a + bx +cy
-        for ii in range(0,(len(RSAArray))):
-            RSAArray[ii,2] = (RSAArray[ii,2] + self.znom) 
-            + (raftBasePlateEqn[0] + raftBasePlateEqn[1]*RSAArray[ii,0] + raftBasePlateEqn[2]*RSAArray[ii,1])
+        if not all(ii == 0 for ii in raftBasePlateEqn):
+            for ii in range(0,(len(RSAArray))):
+                RSAArray[ii,2] = (RSAArray[ii,2] + self.znom) 
+                + (raftBasePlateEqn[0] + raftBasePlateEqn[1]*RSAArray[ii,0] + raftBasePlateEqn[2]*RSAArray[ii,1])
 
         ###########################################################################
         ###Save virtual RSA to text file
@@ -398,10 +399,8 @@ class RSA3DPlot(object):
         #Set limits
         plt.gca().set_xlim(left=0)
         plt.gca().set_ylim(bottom=0)
-        #Move Y axis to oposite side
+        #Move Y axis to opposite side
         ax.view_init(ax.elev, ax.azim+270)
-        #Flip Z axis
-        #ax.invert_zaxis()
         #Show plot
         plt.show()
         
