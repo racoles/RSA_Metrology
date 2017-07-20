@@ -6,12 +6,13 @@ Created on Apr 14, 2017
 '''
 
 # Import #######################################################################################
-from numpy import array, full, concatenate, copy, empty, savetxt, nanmax, nanmin
+from numpy import array, full, concatenate, copy, empty, savetxt, nanmax, nanmin, meshgrid, linspace
 from re import findall
 from mpl_toolkits.mplot3d import Axes3D
 from statistics import median
 import time
 import matplotlib.pyplot as plt
+import scipy.interpolate
 ################################################################################################
 
 class RSA3DPlot(object):
@@ -252,6 +253,9 @@ class RSA3DPlot(object):
         '''
         Plot RSA sensor array in 3D
         '''
+        ###########################################################################
+        ###Plot Virtual RSA
+        ###########################################################################
         #Set up figure
         fig = plt.figure()
         ax = Axes3D(fig) #instead of ax = fig.add_subplot(111, projection='3d')
@@ -268,12 +272,28 @@ class RSA3DPlot(object):
         #Move Y axis to opposite side
         ax.view_init(ax.elev, ax.azim+270)
         #Add raft labels (X+, X-, Y+, Y-)
-        XMax, YMax, _, _ = nanmax(RSAArray, axis=0)
-        _, _, ZMin, _ = nanmin(RSAArray, axis=0)
+        XMax, YMax, ZMax, _ = nanmax(RSAArray, axis=0)
+        XMin, YMin, ZMin, _ = nanmin(RSAArray, axis=0)
         ax.text(median(RSAArray[:,0]), -20, ZMin, '-Y', size=15, zorder=1, clip_on=False, color='k') #-Y
         ax.text(-20, median(RSAArray[:,1]), ZMin, '+X', size=15, zorder=1, clip_on=False,  color='k') #+X
         ax.text(median(RSAArray[:,0]), YMax+20, ZMin, '+Y', size=15, zorder=1, clip_on=False,  color='k') #+Y
         ax.text(XMax+20, median(RSAArray[:,1]), ZMin,  '-X', size=15, zorder=1, clip_on=False,  color='k') #-X
+        #Show plot
+        plt.show()
+        
+        ###########################################################################
+        ###RSA Contour Plot
+        ###########################################################################
+        # Set up a regular grid of interpolation points
+        xi, yi = linspace(XMin, XMax, 100), linspace(YMin, YMax, 100)
+        xi, yi = meshgrid(xi, yi)
+        # Interpolate
+        rbf = scipy.interpolate.Rbf(RSAArray[:,0], RSAArray[:,1], RSAArray[:,2], function='linear')
+        zi = rbf(xi, yi)
+        #Prepare contour
+        plt.imshow(zi, vmin=ZMin, vmax=ZMax, origin='lower', extent=[XMin, XMax, YMin, YMax])
+        plt.scatter(RSAArray[:,0], RSAArray[:,1], c=RSAArray[:,2])
+        plt.colorbar()
         #Show plot
         plt.show()
         
