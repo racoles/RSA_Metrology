@@ -257,7 +257,9 @@ class RSA3DPlot(object):
         ###Plot Virtual RSA
         ###########################################################################
         #Set up figure
-        ax = Axes3D(plt.figure(1)) #instead of ax = fig.add_subplot(111, projection='3d')
+        fig = plt.figure(1)
+        fig.canvas.set_window_title('Virtual RSA') 
+        ax = Axes3D(fig) #instead of ax = fig.add_subplot(111, projection='3d')
         #Plot every tenth point (loop is used to make sure that sensor points are the proper colors)
         for ii in range(0,RSAArray.shape[0]-1, 10):
             ax.scatter(RSAArray[ii,0], RSAArray[ii,1], RSAArray[ii,2], c=colorList[int(RSAArray[ii,3])][1], marker='o')
@@ -282,7 +284,8 @@ class RSA3DPlot(object):
         ###RSA Contour Plot
         ###########################################################################
         #Set up figure
-        plt.figure(2)
+        fig2 = plt.figure(2)
+        fig2.canvas.set_window_title('Virtual RSA: Absolute Height Contour') 
         # Set up a regular grid of interpolation points
         xi, yi = linspace(XMin, XMax, 100), linspace(YMin, YMax, 100)
         xi, yi = meshgrid(xi, yi)
