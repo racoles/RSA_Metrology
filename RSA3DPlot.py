@@ -257,8 +257,7 @@ class RSA3DPlot(object):
         ###Plot Virtual RSA
         ###########################################################################
         #Set up figure
-        fig = plt.figure()
-        ax = Axes3D(fig) #instead of ax = fig.add_subplot(111, projection='3d')
+        ax = Axes3D(plt.figure(1)) #instead of ax = fig.add_subplot(111, projection='3d')
         #Plot every tenth point (loop is used to make sure that sensor points are the proper colors)
         for ii in range(0,RSAArray.shape[0]-1, 10):
             ax.scatter(RSAArray[ii,0], RSAArray[ii,1], RSAArray[ii,2], c=colorList[int(RSAArray[ii,3])][1], marker='o')
@@ -278,12 +277,12 @@ class RSA3DPlot(object):
         ax.text(-20, median(RSAArray[:,1]), ZMin, '+X', size=15, zorder=1, clip_on=False,  color='k') #+X
         ax.text(median(RSAArray[:,0]), YMax+20, ZMin, '+Y', size=15, zorder=1, clip_on=False,  color='k') #+Y
         ax.text(XMax+20, median(RSAArray[:,1]), ZMin,  '-X', size=15, zorder=1, clip_on=False,  color='k') #-X
-        #Show plot
-        plt.show()
         
         ###########################################################################
         ###RSA Contour Plot
         ###########################################################################
+        #Set up figure
+        plt.figure(2)
         # Set up a regular grid of interpolation points
         xi, yi = linspace(XMin, XMax, 100), linspace(YMin, YMax, 100)
         xi, yi = meshgrid(xi, yi)
@@ -293,7 +292,8 @@ class RSA3DPlot(object):
         #Prepare contour
         plt.imshow(zi, vmin=ZMin, vmax=ZMax, origin='lower', extent=[XMin, XMax, YMin, YMax])
         plt.colorbar()
-        #Show plot
+        
+        #Show plots
         plt.show()
         
     def _reshape_3D_to_2D(self, numpyArray):
