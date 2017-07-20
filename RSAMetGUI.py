@@ -43,6 +43,7 @@ class RSAMetGUI(object):
         #                         
         #                <--+X    Ø +Z
         
+        #Sensor Buttons
         #REB0
         S00 = Button(master, text="S00",bg = "white", command=lambda:self._loadInputDataFile(S00, RSAMetGUI.S00List, 'S00')) #white
         S00.grid(row=2, column=2, sticky='W')
