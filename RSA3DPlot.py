@@ -292,7 +292,6 @@ class RSA3DPlot(object):
         zi = rbf(xi, yi)
         #Prepare contour
         plt.imshow(zi, vmin=ZMin, vmax=ZMax, origin='lower', extent=[XMin, XMax, YMin, YMax])
-        plt.scatter(RSAArray[:,0], RSAArray[:,1], c=RSAArray[:,2])
         plt.colorbar()
         #Show plot
         plt.show()
