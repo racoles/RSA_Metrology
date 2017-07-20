@@ -1,7 +1,7 @@
 '''
 @title RSAMetGUI
 @author: Rebecca Coles
-Updated on July 17, 2017
+Updated on July 20, 2017
 Created on Apr 4, 2017
 '''
 
@@ -75,34 +75,33 @@ class RSAMetGUI(object):
         
         #Add coordinate compass
         self.cordImage = PhotoImage(file="cord.pgm", width=100, height=79)
-        cordLable = Label(image=self.cordImage).grid(row=0, column=3, rowspan=3, sticky='W')
+        Label(image=self.cordImage).grid(row=0, column=3, rowspan=3, sticky='W')
         
         #Grid Spacing
-        spaceLabel1 = Label(master, text=" ").grid(row=3, column=0)
-        spaceLabel2 = Label(master, text=" ").grid(row=7, column=0)
-        spaceLabel3 = Label(master, text=" ").grid(row=12, column=0)
-        spaceLabel4 = Label(master, text=" ").grid(row=15, column=0)
+        Label(master, text=" ").grid(row=3, column=0)
+        Label(master, text=" ").grid(row=7, column=0)
+        Label(master, text=" ").grid(row=12, column=0)
+        Label(master, text=" ").grid(row=15, column=0)
         
         #Grid Separator
-        sep = Separator(master, orient="horizontal").grid(row=4, column=0, columnspan=4, sticky='ew')
-        sep = Separator(master, orient="horizontal").grid(row=13, column=0, columnspan=4, sticky='ew')
-        sty = Style(master)
-        sty.configure("TSeparator", background="black")
+        Separator(master, orient="horizontal").grid(row=4, column=0, columnspan=4, sticky='ew')
+        Separator(master, orient="horizontal").grid(row=13, column=0, columnspan=4, sticky='ew')
+        Style(master).configure("TSeparator", background="black")
         
         #Labels
-        raftDataLabel = Label(master, text="Raft Plane Equations (optional)").grid(row=5, column=0, columnspan=2, sticky='W')
-        raftDataLabel2 = Label(master, text="Ex:    53.0234 + 0.0010629 x + 0.00322188 y").grid(row=6, column=0, columnspan=2, sticky='W')
-        processDataLabel = Label(master, text="Process and Plot Data").grid(row=14, column=0, columnspan=2, sticky='W')
+        Label(master, text="Raft Plane Equations (optional)").grid(row=5, column=0, columnspan=2, sticky='W')
+        Label(master, text="Ex:    53.0234 + 0.0010629 x + 0.00322188 y").grid(row=6, column=0, columnspan=2, sticky='W')
+        Label(master, text="Process and Plot Data").grid(row=14, column=0, columnspan=2, sticky='W')
         
         #Datum Plane Text Box
         datumPlaneEqn = StringVar()
-        datumPlaneLabel = Label(master, text="Enter Datum Plane Equation (must also provide Raft Fit Equation)").grid(row=8, column=0, columnspan=2, sticky='W')
-        datumPlaneEntry = Entry(master, textvariable=datumPlaneEqn, width=40).grid(row=9, column=0, columnspan=3, sticky='W')
+        Label(master, text="Enter Datum Plane Equation (must also provide Raft Fit Equation)").grid(row=8, column=0, columnspan=2, sticky='W')
+        Entry(master, textvariable=StringVar(), width=40).grid(row=9, column=0, columnspan=3, sticky='W')
         
         #Raft Fit Text Box
         raftFitEqn = StringVar()
-        raftFitLabel = Label(master, text="Enter Raft Fit Equation (must also provide Datum Plane Equation)").grid(row=10, column=0, columnspan=2, sticky='W')
-        raftFitEntry = Entry(master, textvariable=raftFitEqn, width=40).grid(row=11, column=0, columnspan=3, sticky='W')
+        Label(master, text="Enter Raft Fit Equation (must also provide Datum Plane Equation)").grid(row=10, column=0, columnspan=2, sticky='W')
+        Entry(master, textvariable=raftFitEqn, width=40).grid(row=11, column=0, columnspan=3, sticky='W')
         
         #Plot RSA for manually selected sensor positions
         manualPosition = Button(master, text = "Plot virtual RSA for manually selected sensor positions", 
