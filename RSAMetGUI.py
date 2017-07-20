@@ -44,33 +44,33 @@ class RSAMetGUI(object):
         #                <--+X    Ø +Z
         
         #REB0
-        S00 = Button(master, text="S00",bg = "white", command=lambda:self._loadInputDataFile(S00, RSAMetGUI.S00List)) #white
+        S00 = Button(master, text="S00",bg = "white", command=lambda:self._loadInputDataFile(S00, RSAMetGUI.S00List, 'S00')) #white
         S00.grid(row=2, column=2, sticky='W')
         
-        S01 = Button(master, text="S01",bg = "purple", command=lambda:self._loadInputDataFile(S01, RSAMetGUI.S01List)) #purple
+        S01 = Button(master, text="S01",bg = "purple", command=lambda:self._loadInputDataFile(S01, RSAMetGUI.S01List, 'S01')) #purple
         S01.grid(row=1, column=2, sticky='W')
 
-        S02 = Button(master, text="S02",bg = "yellow", command=lambda:self._loadInputDataFile(S02, RSAMetGUI.S02List)) #yellow
+        S02 = Button(master, text="S02",bg = "yellow", command=lambda:self._loadInputDataFile(S02, RSAMetGUI.S02List, 'S02')) #yellow
         S02.grid(row=0, column=2, sticky='W')
         
         #REB1
-        S10 = Button(master, text="S10",bg = "cyan", command=lambda:self._loadInputDataFile(S10, RSAMetGUI.S10List)) #cyan
+        S10 = Button(master, text="S10",bg = "cyan", command=lambda:self._loadInputDataFile(S10, RSAMetGUI.S10List, 'S10')) #cyan
         S10.grid(row=2, column=1, sticky='W')
 
-        S11 = Button(master, text="S11",bg = "blue", command=lambda:self._loadInputDataFile(S11, RSAMetGUI.S11List)) #blue
+        S11 = Button(master, text="S11",bg = "blue", command=lambda:self._loadInputDataFile(S11, RSAMetGUI.S11List, 'S11')) #blue
         S11.grid(row=1, column=1, sticky='W')
 
-        S12 = Button(master, text="S12",bg = "orange", command=lambda:self._loadInputDataFile(S12, RSAMetGUI.S12List)) #orange
+        S12 = Button(master, text="S12",bg = "orange", command=lambda:self._loadInputDataFile(S12, RSAMetGUI.S12List, 'S12')) #orange
         S12.grid(row=0, column=1, sticky='W')
         
         #REB2
-        S20 = Button(master, text="S20",bg = "magenta", command=lambda:self._loadInputDataFile(S20, RSAMetGUI.S20List)) #magenta
+        S20 = Button(master, text="S20",bg = "magenta", command=lambda:self._loadInputDataFile(S20, RSAMetGUI.S20List, 'S20')) #magenta
         S20.grid(row=2, column=0, sticky='W')
 
-        S21 = Button(master, text="S21",bg = "green", command=lambda:self._loadInputDataFile(S21, RSAMetGUI.S21List)) #green
+        S21 = Button(master, text="S21",bg = "green", command=lambda:self._loadInputDataFile(S21, RSAMetGUI.S21List, 'S21')) #green
         S21.grid(row=1, column=0, sticky='W')
 
-        S22 = Button(master, text="S22",bg = "red", command=lambda:self._loadInputDataFile(S22, RSAMetGUI.S22List)) #red
+        S22 = Button(master, text="S22",bg = "red", command=lambda:self._loadInputDataFile(S22, RSAMetGUI.S22List, 'S22')) #red
         S22.grid(row=0, column=0, sticky='W')
         
         #Add coordinate compass
@@ -113,7 +113,7 @@ class RSAMetGUI(object):
         #Plot RSA for optimal sensor positions
         
         
-    def _loadInputDataFile(self, sensorButton, sensorList):
+    def _loadInputDataFile(self, sensorButton, sensorList, sensorButtonLabel):
         '''
         Load metrology data from input file using openpyxl library
         '''
@@ -126,7 +126,7 @@ class RSAMetGUI(object):
         #create a python list of the data by iterating over all of the Sheet1 data
         sensorList.append(list(self._iter_rows(self.ws)))
         #update the button text to show the filename
-        sensorButton.config(text = self._path_leaf(fileName))
+        sensorButton.config(text = sensorButtonLabel + ': ' + self._path_leaf(fileName))
 
         
     def _openFile(self):
