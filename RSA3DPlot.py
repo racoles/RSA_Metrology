@@ -295,7 +295,8 @@ class RSA3DPlot(object):
         zi = rbf(xi, yi)
         #Prepare contour
         plt.imshow(zi, vmin=ZMin, vmax=ZMax, origin='lower', extent=[XMin, XMax, YMin, YMax])
-        plt.colorbar()
+        #Suppress scientific notation in the color bar
+        plt.colorbar(format ='%10.0f')
         
         #Show plots
         plt.show()
