@@ -97,7 +97,7 @@ class RSAMetGUI(object):
         #Datum Plane Text Box
         datumPlaneEqn = StringVar()
         Label(master, text="Enter Datum Plane Equation (must also provide Raft Fit Equation)").grid(row=9, column=0, columnspan=2, sticky='W')
-        Entry(master, textvariable=StringVar(), width=40).grid(row=10, column=0, columnspan=3, sticky='W')
+        Entry(master, textvariable=datumPlaneEqn, width=40).grid(row=10, column=0, columnspan=3, sticky='W')
         
         #Raft Fit Text Box
         raftFitEqn = StringVar()

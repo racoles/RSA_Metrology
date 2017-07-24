@@ -20,7 +20,7 @@ class RSA3DPlot(object):
     3D plot RSA data
     '''
     #Znom is the height that the sensor height is measured relative to.
-    znom = 13000 #13mm
+    znom = 13 #13mm
 
     def __init__(self):
         '''
@@ -177,10 +177,8 @@ class RSA3DPlot(object):
         raftBasePlateEqn = self._subtractRaftData(datumPlaneEqn, raftFitEqn)
         ##Add Raft Base Plate Plane to Virtual RSA
             #Note: raftBasePlateEqn is an array like [a,b,c] where: z = a + bx +cy
-        for ii in range(0,(len(RSAArray))):
-            RSAArray[ii,2] = (RSAArray[ii,2] + self.znom) 
-            + (raftBasePlateEqn[0] + raftBasePlateEqn[1]*RSAArray[ii,0] + raftBasePlateEqn[2]*RSAArray[ii,1])
-
+        for ii in range(0,(len(RSAArray))):  #1um = 0.001mm
+            RSAArray[ii,2] = (RSAArray[ii,2]*0.001) + self.znom + (raftBasePlateEqn[0] + raftBasePlateEqn[1]*RSAArray[ii,0] + raftBasePlateEqn[2]*RSAArray[ii,1])
         ###########################################################################
         ###Save virtual RSA to text file
         ###########################################################################
@@ -265,7 +263,7 @@ class RSA3DPlot(object):
         #Label axis
         ax.set_xlabel('X (mm)')
         ax.set_ylabel('Y (mm)')
-        ax.set_zlabel('Z (um)')
+        ax.set_zlabel('Z (mm)')
         #Set limits
         plt.gca().set_xlim(left=0)
         plt.gca().set_ylim(bottom=0)
@@ -296,7 +294,7 @@ class RSA3DPlot(object):
         #Prepare contour
         plt.imshow(zi, vmin=ZMin, vmax=ZMax, origin='lower', extent=[XMin, XMax, YMin, YMax])
         #Suppress scientific notation in the color bar
-        plt.colorbar(format ='%10.0f')
+        plt.colorbar(format ='%10.3f')
         
         #Show plots
         plt.show()
