@@ -1,7 +1,7 @@
 '''
 @title RSA3DPlot
 @author: Rebecca Coles
-Updated on Jul 24, 2017
+Updated on Jul 25, 2017
 Created on Apr 14, 2017
 '''
 
@@ -254,7 +254,7 @@ class RSA3DPlot(object):
         ###Plot Virtual RSA
         ###########################################################################
         #Set up figure
-        fig = plt.figure(1)
+        fig = plt.figure(1, figsize=(16, 12))
         fig.canvas.set_window_title('Virtual RSA') 
         ax = Axes3D(fig) #instead of ax = fig.add_subplot(111, projection='3d')
         #Plot every tenth point (loop is used to make sure that sensor points are the proper colors)
@@ -283,7 +283,7 @@ class RSA3DPlot(object):
         ###RSA Contour Plot
         ###########################################################################
         #Set up figure
-        fig2 = plt.figure(2)
+        fig2= plt.figure(2, figsize=(16, 12))
         fig2.canvas.set_window_title('Virtual RSA: Absolute Height Contour') 
         # Set up a regular grid of interpolation points
         xi, yi = linspace(XMin, XMax, 100), linspace(YMin, YMax, 100)
@@ -295,7 +295,14 @@ class RSA3DPlot(object):
         plt.imshow(zi, vmin=ZMin, vmax=ZMax, origin='lower', extent=[XMin, XMax, YMin, YMax])
         #Suppress scientific notation in the color bar
         plt.colorbar(format ='%10.3f')
-        
+        #Set up raft labels
+        plt.xlabel('-Y',fontsize = 20) #bottom
+        plt.ylabel('+X',fontsize = 20) #left
+        plt.title('+Y',fontsize = 20)#top
+        #Right
+        axL = fig2.add_subplot(111)
+        axR = axL.twinx()   # mirror axR
+        axR.set_ylabel('-X',fontsize = 20)
         #Show plots
         plt.show()
         
