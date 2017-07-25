@@ -297,12 +297,12 @@ class RSA3DPlot(object):
         plt.colorbar(format ='%10.3f')
         #Set up raft labels
         plt.xlabel('-Y',fontsize = 20) #bottom
-        plt.ylabel('+X',fontsize = 20) #left
+        plt.ylabel('+X',fontsize = 20, rotation=0) #left
         plt.title('+Y',fontsize = 20)#top
         #Right
         axL = fig2.add_subplot(111)
         axR = axL.twinx()   # mirror axR
-        axR.set_ylabel('-X',fontsize = 20)
+        axR.set_ylabel('-X',fontsize = 20, rotation=0)
         #Show plots
         plt.show()
         
