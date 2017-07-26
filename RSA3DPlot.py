@@ -1,12 +1,12 @@
 '''
 @title RSA3DPlot
 @author: Rebecca Coles
-Updated on Jul 25, 2017
+Updated on Jul 26, 2017
 Created on Apr 14, 2017
 '''
 
 # Import #######################################################################################
-from numpy import array, full, concatenate, copy, empty, savetxt, nanmax, nanmin, meshgrid, linspace
+from numpy import array, full, concatenate, copy, empty, savetxt, nanmax, nanmin, meshgrid, linspace, std
 from re import findall
 from mpl_toolkits.mplot3d import Axes3D
 from statistics import median
@@ -298,7 +298,7 @@ class RSA3DPlot(object):
         #Set up raft labels
         plt.xlabel('-Y',fontsize = 20) #bottom
         plt.ylabel('+X',fontsize = 20, rotation=0) #left
-        plt.title('+Y',fontsize = 20)#top
+        plt.title('Raft AbsZ Standard Deviation = %f \n +Y' %std(RSAArray[:,2]),fontsize = 20)#top
         #Right
         axL = fig2.add_subplot(111)
         axR = axL.twinx()   # mirror axR
