@@ -1,0 +1,14 @@
+ECM-018_AbsZ_170214_run2_1.82
+Mean raft height = 	29.793
+ Datum plane eqn
+53.0275 + 0.00105385 x + 0.00321335 y
+ Raft fit eqn:
+82.8245 + 0.00105256 x + 0.00319618 y
+ PV AbsZ stats
+PV100= 	6.90133
+PV99 = 	6.58251
+PV95 = 	4.7876
+ Raft Abs height above ball centers
+LL ball = 	29.7936
+LR ball = 	29.7921
+UC ball = 	29.793

@@ -1,0 +1,65 @@
+  Machine Serial Number: SP3001014                                      Page:    1
+  ================================================================================
+  Routine Name                                     Run #       Date & Time        
+  ================================================================================
+  ECM_Raft_AbsZ_170207_.RTN_Run2.RTN                   5 Tue Feb 14 15:40:54 2017
+  ================================================================================
+  ECM Raft AbsZ with edges and corners.
+  Contains correction for MF03 actual ball centers.
+  Edit steps 42&43 with the offsets for the current data set.
+  Offset depends on ball center coords in initial datum system.
+  Can make the correction after the run in the saved RTN.
+  ================================================================================
+  Feature      Unit   Nominal     Actual      Tolerances      Deviation   Exceeded
+  ================================================================================
+   
+  Step 16
+  Sphere Diame  mm +008.00000 +007.99285 +00.00500 -00.00500 -000.00715 -000.00215
+  X Location    mm +000.00000 +000.02949                     +000.02949           
+  Y Location    mm +000.00000 -000.01860                     -000.01860           
+  Z Location    mm +000.00000 -003.98184                     -003.98184           
+  Sphericity    mm            +000.10431                     +000.10431           
+   
+  Step 27
+  Sphere Diame  mm +008.00000 +008.00482 +00.00500 -00.00500 +000.00482    ++++   
+  X Location    mm +000.00000 +086.50854                     +086.50854           
+  Y Location    mm +000.00000 -000.01324                     -000.01324           
+  Z Location    mm +000.00000 -003.70949                     -003.70949           
+  Sphericity    mm            +000.01199                     +000.01199           
+   
+  Step 38
+  Sphere Diame  mm +008.00000 +007.99881 +00.00500 -00.00500 -000.00119    -      
+  X Location    mm +000.00000 +043.38154                     +043.38154           
+  Y Location    mm +000.00000 +113.46546                     +113.46546           
+  Z Location    mm +000.00000 -003.96532                     -003.96532           
+  Sphericity    mm            +000.01048                     +000.01048           
+   
+  Step 111 - Distance between planes
+  Straight Lin  mm            +031.94153                                          
+  X Distance    mm            +000.97221                                          
+  Y Distance    mm            +011.47244                                          
+  Z Distance    mm            +029.79428                                          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
