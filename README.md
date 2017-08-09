@@ -76,7 +76,7 @@ To create a RSA simulation using RSA_Metrology:
 
 1. In the "Load Sensor Metrology Files" section of the RSA_Metrology GUI, click the colored buttons to place the OGP measured sensor data (.xlsx file) in the locations that you plan to put the sensors on the RSA. *RSA_Metrology requires all nine sensor position to be filled to create a simulation*. The sensors are laid out using the machine coordinate system (MCS) setup by the OGP. The button labels show the S## RSA sensor locations as designated in the LSST document LCA-13381.
 
-⋅⋅⋅Note: Sensor data from the OGP is measured in part coordinate system (PCS). RSA_Metrology automatically preforms the appropriate coordinate transform of all the sensors to MCS.
+Note: Sensor data from the OGP is measured in part coordinate system (PCS). RSA_Metrology automatically preforms the appropriate coordinate transform of all the sensors to MCS.
 
 2. (Optional) Enter the Raft plane equations in the appropriate text boxes if you want to see the absolute height of the sensors on a given Raft baseplate. If all you want is to see the flatness of nine sensors relative to each other, then you can leave these text boxes empty. More information on where to find these equations can be found in the [Raft Baseplate](#raft-baseplate) subsection.
 
@@ -84,7 +84,7 @@ To create a RSA simulation using RSA_Metrology:
 
 4. Two windows will emerge showing the absolute height of the sensors as a 3D plot and a contour map. The 3D projection can be rotated as needed to see the RSA at different angles, and both can be saved using the save button found in the menu bar at the top of the image. The camera coordinate system Raft baseplate labels, that are printed on the Raft baseplate, are shown on both plots: +Y, -Y, +X, -X.
 
-...Note: To reduce processing time, the 3D plot will only show every tenth measured point. An output file containing all the measured points in the simulation will be saved to the RSA_Metrology program directory. More information about this file can be found in the [Output Results File](#output-results-file) subsection.
+Note: To reduce processing time, the 3D plot will only show every tenth measured point. An output file containing all the measured points in the simulation will be saved to the RSA_Metrology program directory. More information about this file can be found in the [Output Results File](#output-results-file) subsection.
 
 ## Output Results File
 
@@ -123,7 +123,7 @@ Where the columns are:
 | 7            | green         | S21                                 |
 | 8            | red           | S22                                 |
 
-⋅⋅⋅More information on the LSST RSA sensor location designators can be found in the LSST document LCA-13381.
+More information on the LSST RSA sensor location designators can be found in the LSST document LCA-13381.
 
 ## Troubleshooting
 
