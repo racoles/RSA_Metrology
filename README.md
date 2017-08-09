@@ -84,7 +84,7 @@ To create a RSA simulation using RSA_Metrology:
 
 4. Two windows will emerge showing the absolute height of the sensors as a 3D plot and a contour map. The 3D projection can be rotated as needed to see the RSA at different angles, and both can be saved using the save button found in the menu bar at the top of the image. The camera coordinate system Raft baseplate labels, that are printed on the Raft baseplate, are shown on both plots: +Y, -Y, +X, -X.
 
-⋅⋅⋅Note: To reduce processing time, the 3D plot will only show every tenth measured point. An output file containing all the measured points in the simulation will be saved to the RSA_Metrology program directory. More information about this file can be found in the [Output Results File](#output-results-file) subsection.
+...Note: To reduce processing time, the 3D plot will only show every tenth measured point. An output file containing all the measured points in the simulation will be saved to the RSA_Metrology program directory. More information about this file can be found in the [Output Results File](#output-results-file) subsection.
 
 ## Output Results File
 
