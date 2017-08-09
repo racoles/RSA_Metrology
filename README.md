@@ -111,17 +111,17 @@ Where the columns are:
 3. Z height of the measured point in millimeters. If you included Raft data in your simulation, this value will include both the measured sensor height as well as the measured height of the Raft at that point.
 4. Color code for sensor. This number is used by RSA_Metrology to color code the points for the 3D RSA plot. The following table shows the color code for all of sensor positions:
 
-⋅⋅⋅| Color Number | 3D Plot Color | LSST RSA Sensor Location Designator |
-⋅⋅⋅| -------------|---------------| ------------------------------------|
-⋅⋅⋅| 0            | white         | S00                                 |
-⋅⋅⋅| 1            | purple        | S01                                 |
-⋅⋅⋅| 2            | yellow        | S02                                 |
-⋅⋅⋅| 3            | cyan          | S10                                 |
-⋅⋅⋅| 4            | blue          | S11                                 |
-⋅⋅⋅| 5            | orange        | S12                                 |
-⋅⋅⋅| 6            | magenta       | S20                                 |
-⋅⋅⋅| 7            | green         | S21                                 |
-⋅⋅⋅| 8            | red           | S22                                 |
+| Color Number | 3D Plot Color | LSST RSA Sensor Location Designator |
+| -------------|---------------| ------------------------------------|
+| 0            | white         | S00                                 |
+| 1            | purple        | S01                                 |
+| 2            | yellow        | S02                                 |
+| 3            | cyan          | S10                                 |
+| 4            | blue          | S11                                 |
+| 5            | orange        | S12                                 |
+| 6            | magenta       | S20                                 |
+| 7            | green         | S21                                 |
+| 8            | red           | S22                                 |
 
 ⋅⋅⋅More information on the LSST RSA sensor location designators can be found in the LSST document LCA-13381.
 
