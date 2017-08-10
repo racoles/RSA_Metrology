@@ -1,5 +1,0 @@
-[com.canonical.unity-greeter]
-background = '/usr/share/backgrounds/Foggy_Forest_by_Jake_Stewart.jpg'
-logo = '/usr/share/unity-greeter/logo.png'
-play-ready-sound = false
-
